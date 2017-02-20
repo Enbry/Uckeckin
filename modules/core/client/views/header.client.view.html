@@ -1,0 +1,42 @@
+<div class="row border-bottom" ng-controller="HeaderController">
+  <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+      <span minimaliza-sidebar></span>
+    </div>
+    <ul class="nav navbar-top-links navbar-right" ng-hide="authentication.user">
+      <li>
+        <a ui-sref="authentication.signup">Inscription</a>
+      </li>
+      <li class="divider-vertical"></li>
+      <li>
+        <a ui-sref="authentication.signin">Connexion</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-top-links navbar-nav navbar-right" ng-show="authentication.user">
+      <li uib-dropdown="">
+        <a uib-dropdown-toggle="" class="user-header-dropdown-toggle" role="button">
+          <img ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
+          <span ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
+        </a>
+        <ul uib-dropdown-menu="" role="menu">
+          <li ui-sref-active="active">
+            <a ui-sref="settings.profile">Éditer le profil</a>
+          </li>
+          <li ui-sref-active="active">
+            <a ui-sref="settings.picture">Changer la photo de profil</a>
+          </li>
+          <li ui-sref-active="active" ng-show="authentication.user.provider === 'local'">
+            <a ui-sref="settings.password">Changer le mot de passe</a>
+          </li>
+          <!--<li ui-sref-active="active">
+            <a ui-sref="settings.accounts">Manage Social Accounts</a>
+          </li>-->
+          <li class="divider"></li>
+          <li>
+            <a href="/api/auth/signout" target="_self">Déconnexion</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div>

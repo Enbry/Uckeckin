@@ -1,0 +1,26 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.email._id ? 'Modifier un email' : 'Créer un email'}}</h1>
+  </div>
+  <div class="pull-right">
+    <a ng-show="vm.email._id" class="btn btn-primary" ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.emailForm" class="form-horizontal" ng-submit="vm.save(vm.form.emailForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group">
+          <label class="control-label" for="content">Sujet</label>
+          <textarea name="content" data-ng-model="vm.email.subject" id="subject" class="form-control" cols="30" rows="10" placeholder="Sujet"></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">{{vm.email._id ? 'Mettre à jour' : 'Créer'}}</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,274 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-md-8">
+      <h2>
+        Beacons
+      </h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          Admin
+        </li>
+        <li class="active">
+          <strong>Beacons</strong>
+        </li>
+      </ol>
+    </div>
+    <div class="col-md-4 p-w-lg m-t-lg">
+      <input class="form-control" type="text" ng-model="vm.search" placeholder="Rechercher" ng-change="vm.figureOutItemsToDisplay()" />
+    </div>
+  </div>
+  <div class="wrapper animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-7 col-md-7 col-sm-7">
+        <div class="ibox float-e-margins m-t-lg beacon-box">
+          <div class="ibox-title li-beacons-title">
+            <h5>Liste des beacons</h5>
+          </div>
+          <div class="ibox-content project-list">
+            <table class="footable table table-stripped toggle-arrow-tiny admin-beacon-table" data-page-size="8">
+              <thead>
+                <tr>
+                  <th>Stimshop ID</th>
+                  <!--<th class="text-center">Version du firmware</th>
+                  <th class="text-center">Version du hardware</th>-->
+                  <!--<th class="text-center">Signal</th>
+                  <th class="text-center" data-hide="all">Numéro de commande</th>
+                  <th class="text-center" data-hide="all">Date de réception</th>
+                  <th class="text-center">Quantité</th>-->
+                  <th class="text-center">Statut</th>
+                  <!--<th class="text-center">Type</th>-->
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="beacon in vm.pagedItems">
+                  <td>
+                    <a ng-click="showDetails = ! showDetails">
+                      <i ng-if="!showDetails" class="fa fa-chevron-right" aria-hidden="true"></i>
+                      <i ng-if="showDetails" class="fa fa-chevron-down" aria-hidden="true"></i>
+                      {{beacon.beaconName}}
+                    </a>
+                    <dl ng-show="showDetails" class="dl-detail">
+                      <dt class="m-t-xs">Signal:</dt>
+                      <dd class="m-t-xs text-left"> {{ beacon.signal | uppercase }}</dd>
+                      <dt class="m-t-xs">Type:</dt>
+                      <dd class="m-t-xs text-left"> {{ beacon.beaconType }}</dd>
+                      <dt class="m-t-xs">Quantité:</dt>
+                      <dd class="m-t-xs text-left"> {{ beacon.beaconQty }}</dd>
+                      <dt class="m-t-xs">Date de réception:</dt>
+                      <dd class="m-t-xs text-left">{{ beacon.recDate | date:"dd/MM/yyyy" }}</dd>
+                      <dt class="m-t-xs">Numéro de commande:</dt>
+                      <dd class="m-t-xs text-left"> {{ beacon.cmdNb }}</dd>
+                      <!--<dt class="m-t-xs">Version du firmware:</dt>
+                      <dd class="m-t-xs text-left">{{ beacon.firmware_v }}</dd>
+                      <dt class="m-t-xs">Version du hardware:</dt>
+                      <dd class="m-t-xs text-left">{{ beacon.hardware_v }}</dd>-->
+                    </dl>
+                  </td>
+
+                  <!--<td class="text-center" ng-bind="beacon.firmware_v"></td>
+                  <td class="text-center" ng-bind="beacon.hardware_v"></td>-->
+                  <!--<td class="text-center" >{{ beacon.signal | uppercase }}</td>-->
+                  <!--<td class="text-center" ng-bind="beacon.cmdNb"></td>
+                  <td class="text-center">{{ beacon.recDate }}</td>-->
+                  <!--  <td class="text-center" ng-bind="beacon.beaconQty"></td>-->
+                  <td class="text-center"><span class="badge badge-warning" ng-bind="beacon.beaconStatus"></span></td>
+                  <!--<td class="text-center" ng-bind="beacon.beaconType"></td>-->
+                </tr>
+                <!--<tr ng-class="{ 'hidden': ! showDetails }">
+                tets
+                {{ beacon.recDate }}
+              </tr>-->
+            </tbody>
+            <!--<tfoot>
+            <tr>
+            <td colspan="5">
+            <ul class="pagination pull-right"></ul>
+          </td>
+        </tr>
+      </tfoot>-->
+    </table>
+
+    <uib-pagination class="pull-right space-15" rotate="true" force-ellipses="true" boundary-links="true" first-text="<<" last-text=">>" next-text=">" previous-text="<" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
+  </div>
+</div>
+</div>
+<div class="col-lg-5 col-md-5 col-sm-5">
+  <div class="ibox float-e-margins m-t-lg beacon-box">
+    <div class="ibox-title li-beacons-title">
+      <h5>Commander des beacons</h5>
+    </div>
+    <div class="ibox-content">
+      <form name="vm.form.beaconForm" class="form-horizontal" ng-submit="vm.save(vm.form.beaconForm.$valid)" novalidate>
+        <fieldset>
+          <div class="form-group p-w-sm" show-errors>
+            <label class="control-label" for="cmdNb">Numéro de commande</label>
+            <input name="cmdNb" type="text" ng-model="vm.beacon.cmdNb" id="cmdNb" class="form-control" placeholder="Numéro de commande">
+            <div ng-messages="vm.form.beaconForm.title.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Saisir un numéro de commande</p>
+            </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+          <div class="form-group p-w-sm" show-errors>
+            <label class="control-label" for="beaconType">Type</label><br>
+            <select style="width:100%" class="js-example-responsive" ui-select2 ng-model="vm.beacon.beaconType" id="beaconType" name="beaconType" required>
+              <optgroup label="Sélectionner un type de beacon">
+                <option value="Stimshop">Stimshop</option>
+                <option value="Third Party">Third Party</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="hr-line-dashed"></div>
+
+          <!--<div class="form-group p-w-sm beacon-cal">
+          <label class="control-label" for="recDate">Date de réception</label>
+          <div class="input-group">
+          <span class="input-group-addon">
+          <i class="fa fa-calendar-plus-o"></i>
+        </span>
+        <input class="form-control"
+        placeholder="Choisir une date"
+        ng-model="vm.beacon.recDate"
+        ng-model-options="{ updateOn: 'blur' }">
+      </div>
+    </div>-->
+
+
+    <div class="form-group p-w-sm beacon-cal">
+      <label class="control-label" for="recDate">Date de réception</label>
+      <div class="row">
+        <div class="col-md-12">
+          <p class="input-group">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open1()"><i class="fa fa-calendar-plus-o"></i></button>
+            </span>
+            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="vm.beacon.recDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" ng-click="open1()"/>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+    <div class="form-group p-w-sm" show-errors>
+      <label class="control-label" for="beaconQty">Quantité</label>
+      <input ng-model="vm.beacon.beaconQty" name="beaconQty" type="number" min="1" id="beaconQty" class="form-control" required>
+    </div>
+    <div class="form-group p-w-sm">
+      <button type="submit" class="btn btn-order btn-primary btn-outline btn-rounded m-t-md pull-right">
+        <i class="glyphicon fa fa-shopping-cart"></i>Commander
+      </button>
+    </div>
+    <div ng-show="vm.error" class="text-danger">
+      <strong ng-bind="vm.error"></strong>
+    </div>
+  </fieldset>
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+  <div class="col-md-8 col-lg-8" ng-class="{ 'hidden': ! showDetails }">
+    <p>test
+      {{ beacon.recDate }}
+    </p>
+  </div>
+</div>
+</div>
+</section>
+<!--
+<div class="wrapper wrapper-content animated fadeInRight">
+<div class="row">
+<div class="col-lg-12">
+<div class="ibox float-e-margins">
+<div class="ibox-title">
+<h5>FooTable with row toggler, sorting and pagination</h5>
+
+<div ibox-tools> </div>
+</div>
+<div class="ibox-content">
+<table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
+<thead>
+<tr>
+<th data-toggle="true">Stimshop ID</th>
+<th>Signal</th>
+<th>Quantité</th>
+<th>Type</th>
+<th data-hide="all">Numéro de commande</th>
+<th data-hide="all">Date de réception</th>
+<th>Statut</th>
+</tr>
+</thead>
+<tbody>
+<tr ng-repeat="beacon in vm.beacons">
+<td>{{ beacon.beaconName}}</td>
+<td>{{ beacon.signal | uppercase }}</td>
+<td>{{ beacon.beaconQty}}</td>
+<td>{{ beacon.beaconType }}</td>
+<td>{{ beacon.cmdNb }}</td>
+<td>{{ beacon.recDate }}</td>
+<td><span class="badge badge-warning">{{ beacon.beaconStatus }}</span></td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="5">
+<ul class="pagination pull-right"></ul>
+</td>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-lg-12">
+<div class="ibox float-e-margins">
+<div class="ibox-title">
+<h5>Simple FooTable with pagination, sorting and filter</h5>
+
+<div ibox-tools> </div>
+</div>
+<div class="ibox-content">
+<input type="text" class="form-control input-sm m-b-xs" id="filter"
+placeholder="Search in table">
+<table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
+<thead>
+<tr>
+<th>Rendering engine</th>
+<th>Browser</th>
+<th data-hide="phone,tablet">Platform(s)</th>
+<th data-hide="phone,tablet">Engine version</th>
+<th data-hide="phone,tablet">CSS grade</th>
+</tr>
+</thead>
+<tbody>
+<tr ng-repeat="beacon in vm.beacons" class="gradeX">
+<td>Trident</td>
+<td>Internet
+Explorer 4.0
+</td>
+<td>Win 95+</td>
+<td class="center">4</td>
+<td class="center">X</td>
+</tr>
+
+
+</tbody>
+<tfoot>
+<tr>
+<td colspan="5">
+<ul class="pagination pull-right"></ul>
+</td>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+-->

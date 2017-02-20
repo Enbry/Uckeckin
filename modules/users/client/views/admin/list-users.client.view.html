@@ -1,0 +1,75 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+      <h2>Clients</h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          <a>Admin</a>
+        </li>
+        <li class="active">
+          <strong>Clients</strong>
+        </li>
+      </ol>
+    </div>
+    <div class="col-md-4 m-t-lg p-w-lg">
+      <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Rechercher" ng-change="vm.figureOutItemsToDisplay()" />
+    </div>
+  </div>
+  <div class="wrapper animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox float-e-margins m-t-lg lic-li-box">
+          <div class="ibox-title">
+            <h5>Liste des clients</h5>
+            <div class="ibox-tools">
+              <a class="btn btn-primary btn-rounded" data-ui-sref="admin.user-create">
+                <i class="glyphicon glyphicon-plus"></i> Ajouter un client
+              </a>
+            </div>
+          </div>
+          <div class="ibox-content project-list">
+            <table class="footable table table-striped toggle-arrow-tiny" data-page-size="8">
+              <thead>
+                <tr>
+                  <!--<th>Nom</th>
+                  <th>Prénom</th>-->
+                  <th class="text-center">Entreprise</th>
+                  <th class="text-center">Nombre de licences</th>
+                  <th class="text-center">Licences actives</th>
+                  <th class="text-center">Nombre de beacons</th>
+                  <th class="text-center">Contact</th>
+                  <th class="text-center">Date d'inscription</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="user in vm.pagedItems">
+                  <!--<td ng-bind="user.firstName"></td>
+                  <td ng-bind="user.lastName"></td>-->
+                  <td class="text-center" ng-bind="user.company"></td>
+                  <td class="text-center" ng-bind=""></td>
+                  <td class="text-center" ng-bind=""></td>
+                  <td class="text-center" ng-bind=""></td>
+                  <td class="text-center" ng-bind="user.email"></td>
+                  <td class="text-center">{{ user.created | date:"dd/MM/yyyy" }}</td>
+                  <td class="text-center">
+                    <button class="btn btn-warning btn-rounded btn-outline btn-sm" ui-sref="admin.user({userId: user._id})">
+                      <i class="glyphicon fa fa-eye"></i>Détails
+                    </button>
+                    <button class="btn btn-info btn-rounded btn-outline btn-sm" ui-sref="admin.user-edit({userId: user._id})">
+                      <i class="glyphicon fa fa-pencil"></i>Modifier
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <uib-pagination class="pull-right space-15" rotate="true" force-ellipses="true" boundary-links="true" first-text="<<" last-text=">>" next-text=">" previous-text="<" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

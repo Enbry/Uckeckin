@@ -1,0 +1,132 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+      <h2>Clients</h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          <a data-ui-sref="admin.users">Clients</a>
+        </li>
+        <li class="active">
+          <strong>{{vm.user._id ? 'Modifier un client' : 'Ajouter un client'}}</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 user-form-box">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title li-user-form">
+            <h5>{{vm.user._id ? 'Modifier le client' : 'Ajouter un client'}}
+            </h5>
+          </div>
+          <div class="ibox-content">
+            <form name="vm.userForm" ng-submit="vm.update(vm.userForm.$valid)" class="form-horizontal" novalidate>
+              <fieldset>
+                <div class="row">
+                  <div class="col-md-6 b-r">
+                    <div class="form-group">
+                      <label for="company">Entreprise</label>
+                      <input type="text" id="company" name="company" class="form-control" ng-model="vm.user.company" placeholder="Entreprise" disabled=""/>
+                    </div>
+                    <div class="form-group">
+                      <label for="firstName">Nom</label>
+                      <input type="text" id="firstName" name="firstName" class="form-control" ng-model="vm.user.firstName" placeholder="Nom" disabled />
+                    </div>
+                    <div class="form-group">
+                      <label for="lastName">Prénom</label>
+                      <input type="text" id="lastName" name="lastName" class="form-control" ng-model="vm.user.lastName" placeholder="Prénom" disabled />
+                    </div>
+                    <div class="form-group" show-errors>
+                      <label for="address">Adresse</label>
+                      <input type="text" id="address" name="address" class="form-control" ng-model="vm.user.address" placeholder="Adresse"/>
+                      <div ng-messages="vm.userForm.address.$error" role="alert">
+                        <p class="help-block error-text" ng-message="required">Veuillez saisir une adresse</p>
+                      </div>
+                    </div>
+                    <div class="form-group" show-errors>
+                      <label for="zip_code">Code Postal</label>
+                      <input type="text" id="zip_code" name="zip_code" class="form-control" ng-model="vm.user.zip_code" placeholder="Code Postal"/>
+                      <div ng-messages="vm.userForm.zip_code.$error" role="alert">
+                        <p class="help-block error-text" ng-message="required">Veuillez saisir un code postal</p>
+                      </div>
+                    </div>
+                    <div class="form-group" show-errors>
+                      <label for="town">Ville</label>
+                      <input type="text" id="town" name="town" class="form-control" ng-model="vm.user.town" placeholder="Ville"/>
+                      <div ng-messages="vm.userForm.town.$error" role="alert">
+                        <p class="help-block error-text" ng-message="required">Veuillez saisir une ville</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group" show-errors>
+                      <label for="country">Pays</label>
+                      <div class="controls">
+                        <input class="form-control" type="text" name="country" ng-model="vm.user.country" id="country" placeholder="Pays"/>
+                        <div ng-messages="vm.userForm.country.$error" role="alert">
+                          <p class="help-block error-text" ng-message="required">Veuillez saisir un pays</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="phone">Téléphone</label>
+                      <div class="controls">
+                        <input class="form-control" type="text" name="phone" ng-model="vm.user.phone" id="phone" placeholder="Téléphone"/>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="apiKey">API Key</label>
+                      <input type="text" id="apiKey" name="apiKey" class="form-control" ng-model="vm.user.apiKey" placeholder="API Key" disabled />
+                    </div>
+                    <div class="form-group" show-errors>
+                      <label for="roles">Rôle</label>
+                      <div class="controls">
+                        <input class="form-control" type="text" name="roles" ng-model="vm.user.roles" id="roles" ng-list required />
+                        <div ng-messages="vm.userForm.roles.$error" role="alert">
+                          <p class="help-block error-text" ng-message="required">Veuillez entrer un rôle</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group" show-errors>
+                      <label for="siret">SIRET</label>
+                      <div class="controls">
+                        <input class="form-control" type="text" name="siret" ng-model="vm.user.siret" id="siret" placeholder="Numéro de SIRET"/>
+                        <div ng-messages="vm.userForm.siret.$error" role="alert">
+                          <p class="help-block error-text" ng-message="required">Veuillez entrer un numéro de SIRET</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group" show-errors>
+                      <label for="tva_number">Numéro de TVA</label>
+                      <div class="controls">
+                        <input class="form-control" type="text" name="tva_number" ng-model="vm.user.tva_number" id="tva_number" placeholder="Numéro de TVA"/>
+                        <div ng-messages="vm.userForm.tva_number.$error" role="alert">
+                          <p class="help-block error-text" ng-message="required">Veuillez entrer un numéro de TVA</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <button type="submit" ng-show="vm.user._id" ng-click="vm.remove()" class="m-t-md btn btn-danger btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-trash"></i>Supprimer</button>
+                      <button type="submit" class="m-t-md m-r-sm btn btn-primary btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-floppy-o"></i>{{vm.user._id ? 'Enregistrer' : 'Créer'}}</button>
+                    </div>
+                    <div ng-show="vm.error" class="text-danger">
+                      <strong ng-bind="vm.error"></strong>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

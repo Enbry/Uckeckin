@@ -1,0 +1,82 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+      <h2>Zones</h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          <a data-ui-sref="zones.list">Zones</a>
+        </li>
+        <li class="active">
+          <strong>{{vm.zone._id ? 'Modifier une zone' : 'Ajouter une zone'}}</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 zones-form-box">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title li-license-form">
+            <h5>{{vm.zone._id ? 'Modifier une zone' : 'Ajouter une zone'}}</h5>
+          </div>
+          <div class="ibox-content">
+            <form role="form" name="vm.form.zoneForm" class="form-horizontal" ng-submit="vm.save(vm.form.zoneForm.$valid)" novalidate>
+              <fieldset>
+                <div class="col-sm-12">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="form-group p-w-sm" show-errors>
+                        <label class="control-label" for="zoneName">Titre</label>
+                        <input name="zoneName" type="text" ng-model="vm.zone.zoneName" id="zoneName" class="form-control" placeholder="Titre" required>
+                        <div ng-messages="vm.form.zoneForm.title.$error" role="alert">
+                          <p class="help-block error-text" ng-message="required">Saisir un titre</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="form-group p-w-sm">
+                        <label class="control-label" for="zoneTags">Tags</label>
+                        <!--<tags-input ng-model="tags" placeholder="Tags">
+                      </tags-input>-->
+                      <input name="zoneTags" type="text" ng-model="vm.zone.zoneTags" id="zoneTags" class="form-control" placeholder="Tags">
+                    </div>
+                  </div>
+                </div>
+                <div ng-if="vm.hasArea" class="row">
+                  <div class="form-group p-w-lg" show-errors>
+                    <label class="control-label" for="place">Lieu</label>
+                    <select style="width:100%" class="js-example-responsive" ui-select2 ng-model="vm.zone.places._id" id="place" name="place">
+                      <optgroup label="Sélectionner un lieu">
+                        <option ng-repeat="area in vm.areas" ng-if="vm.authentication.user._id === area.user._id" value="{{area._id}}">{{ area.placeName }}</option>
+                      </optgroup>
+                    </select>
+                    <div class="m-t-sm pull-right">
+                      <a data-ui-sref="areas.create" class="text-muted"><i class="fa fa-plus-circle glyphicon"></i> Ajouter un lieu</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" ng-if="!vm.hasArea">
+                  <div class="col-lg-12">
+                    <div class="row m-t-md">
+                      <a data-ui-sref="areas.create" class="text-muted add-area"><i class="fa fa-plus-circle glyphicon"></i> Ajouter un lieu</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group p-w-sm">
+                <button type="submit" ng-show="vm.zone._id" ng-click="vm.remove()" class="m-t-md m-r-sm btn btn-danger btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-trash"></i>Supprimer</button>
+                <button type="submit" class="m-t-md m-r-sm btn btn-primary btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-floppy-o"></i>{{vm.zone._id ? 'Enregistrer' : 'Ajouter'}}</button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>

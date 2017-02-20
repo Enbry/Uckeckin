@@ -1,0 +1,87 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+      <h2>Licences</h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          <a data-ui-sref="home">Admin</a>
+        </li>
+        <li class="active">
+          <a data-ui-sref="admin.beacons.list">Licences</a>
+        </li>
+        <li class="active">
+          <a data-ui-sref="admin.prices-licenses.list">Prix des licences</a>
+        </li>
+        <li class="active">
+          <strong>{{vm.licensePrice._id ? 'Modifier le prix de la licence' : 'Ajouter un prix de licence'}}</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 lic-form-box">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title li-license-form">
+            <h5>{{vm.licensePrice._id ? 'Modifier le prix de la licence' : 'Ajouter un prix de licence'}}</h5>
+          </div>
+          <div class="ibox-content">            
+            <form name="vm.form.licensePriceForm" class="form-horizontal" ng-submit="vm.save(vm.form.licensePriceForm.$valid)" novalidate>
+              <fieldset>
+                <div class="col-sm-12">
+                  <div class="row">
+                    <div class="form-group p-w-sm" show-errors>
+                      <label class="control-label" for="quantity">Quantité</label>
+                      <input name="quantity" type="number" ng-model="vm.licensePrice.licenseQty" id="licenseQty" class="form-control" placeholder="Quantité" required>
+                      <div ng-messages="vm.form.licensePriceForm.title.$error" role="alert">
+                        <p class="help-block error-text" ng-message="required">Saisir une quantité</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group p-w-sm">
+                      <label class="control-label" for="unit_price">Prix unitaire</label>
+                      <input type="number" name="unit_price" data-ng-model="vm.licensePrice.licensePrice" id="unit_price" class="form-control" cols="30" rows="10" placeholder="Prix unitaire" required></textarea>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group p-w-sm">
+                      <label class="control-label" for="red_1">Réduction 1 mois</label>
+                      <input type="number" name="red_1" data-ng-model="vm.licensePrice.licenseRed1" id="red_1" class="form-control" cols="30" rows="10" placeholder="Réduction 1 mois" required></textarea>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group p-w-sm">
+                      <label class="control-label" for="red_3">Réduction 3 mois</label>
+                      <input type="number" name="red_3" data-ng-model="vm.licensePrice.licenseRed3" id="red_3" class="form-control" cols="30" rows="10" placeholder="Réduction 3 mois" required></textarea>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group p-w-sm">
+                      <label class="control-label" for="red_6">Réduction 6 mois</label>
+                      <input type="number" name="red_6" data-ng-model="vm.licensePrice.licenseRed6" id="red_6" class="form-control" cols="30" rows="10" placeholder="Réduction 6 mois" required></textarea>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group p-w-sm">
+                      <label class="control-label" for="red_12">Réduction 12 mois</label>
+                      <input type="number" name="red_12" data-ng-model="vm.licensePrice.licenseRed12" id="red_12" class="form-control" cols="30" rows="10" placeholder="Réduction 12 mois" required></textarea>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group p-w-sm">
+                      <button type="submit" ng-show="vm.licensePrice._id" ng-click="vm.remove()" class="btn btn-danger btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-trash-o"></i>Supprimer</button>
+                      <button type="submit" class="btn btn-primary btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-floppy-o"></i>{{vm.licensePrice._id ? 'Enregistrer' : 'Ajouter'}}</button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div ng-show="vm.error" class="text-danger">
+                      <strong ng-bind="vm.error"></strong>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </section>

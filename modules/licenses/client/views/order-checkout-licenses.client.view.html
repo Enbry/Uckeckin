@@ -1,0 +1,216 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Licences</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a data-ui-sref="home">Accueil</a>
+      </li>
+      <li>
+        <a class="active" data-ui-sref="licenses.list">Licences</a>
+      </li>
+      <li>
+        <a class="active" data-ui-sref="licenses.order">Commande</a>
+      </li>
+      <li>
+        <strong>Paiement</strong>
+      </li>
+    </ol>
+  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <!--<div class="row">
+    <div class="col-md-4">
+      <div class="payment-card">
+        <i class="fa fa-cc-visa payment-icon-big text-success"></i>
+        <h2>
+          **** **** **** 1060
+        </h2>
+        <div class="row">
+          <div class="col-sm-6">
+            <small>
+              <strong>Expiry date:</strong> 10/16
+            </small>
+          </div>
+          <div class="col-sm-6 text-right">
+            <small>
+              <strong>Name:</strong> David Williams
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="payment-card">
+        <i class="fa fa-cc-mastercard payment-icon-big text-warning"></i>
+        <h2>
+          **** **** **** 7002
+        </h2>
+        <div class="row">
+          <div class="col-sm-6">
+            <small>
+              <strong>Expiry date:</strong> 10/16
+            </small>
+          </div>
+          <div class="col-sm-6 text-right">
+            <small>
+              <strong>Name:</strong> Anna Smith
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="payment-card">
+        <i class="fa fa-cc-discover payment-icon-big text-danger"></i>
+        <h2>
+          **** **** **** 3466
+        </h2>
+        <div class="row">
+          <div class="col-sm-6">
+            <small>
+              <strong>Expiry date:</strong> 10/16
+            </small>
+          </div>
+          <div class="col-sm-6 text-right">
+            <small>
+              <strong>Name:</strong> Morgan Stanch
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>-->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox">
+        <div class="ibox-title">
+          Moyens de paiement
+        </div>
+        <div class="ibox-content">
+          <uib-accordion class="panel-group payments-method">
+            <uib-accordion-group is-open="true">
+              <uib-accordion-heading>
+                <div class="pull-right">
+                  <i class="fa fa-cc-visa text-success"></i>
+                  <i class="fa fa-cc-mastercard text-warning"></i>
+                  <i class="fa fa-cc-amex text-info"></i>
+                </div>
+                <h5 class="panel-title">
+                  Carte de crédit
+                </h5>
+              </uib-accordion-heading>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <h2>Panier</h2>
+                    <strong>Produits:</strong>  <br/>
+                    <strong>Prix:</strong> <span class="text-navy">400.00 €</span>
+                  </div>
+                  <div class="col-md-8">
+                    <form role="form" id="payment-form">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <div class="form-group">
+                            <label>NUMÉRO DE CARTE</label>
+                            <div class="input-group">
+                              <input type="tel" class="form-control card-number cc-number" name="Number" data-stripe="number" autocomplete="cc-number" placeholder="•••• •••• •••• ••••" required />
+                              <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-7 col-md-7">
+                          <div class="form-group">
+                            <label>DATE D'EXPIRATION</label>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <input type="text" data-stripe="exp-month" placeholder="MM" class="card-expiry-month form-control" required>
+                              </div>
+                              <div class="col-md-6">
+                                <input type="text" data-stripe="exp-year" placeholder="YYYY" class="card-expiry-year form-control" required>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xs-5 col-md-5 pull-right">
+                          <div class="form-group">
+                            <label>CODE CVC</label>
+                            <input type="text" class="form-control" name="CVC" placeholder="CVC"  required/>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <div class="form-group">
+                            <label>PROPRIÉTAIRE DE LA CARTE</label>
+                            <input type="text" class="form-control" name="nameCard" placeholder="Nom et prénom"/>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <button class="btn btn-info btn-rounded btn-outline btn-md pull-right" type="submit">
+                            <i class="glyphicon fa fa-lock"></i>Payer
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </uib-accordion-group>
+            <uib-accordion-group>
+              <uib-accordion-heading>
+                <div class="pull-right">
+                  <!--<i class="fa fa-cc-paypal text-success"></i>-->
+                </div>
+                <h5 class="panel-title">
+                  Virement
+                </h5>
+              </uib-accordion-heading>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h2 class="text-center">Merci de nous contacter pour activer vos licences</h2>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12">
+                    <button class="btn btn-info btn-rounded btn-outline btn-md pull-right" type="submit">
+                      <i class="glyphicon fa fa-envelope-o"></i>Envoyer
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </uib-accordion-group>
+            <uib-accordion-group>
+              <uib-accordion-heading>
+                <div class="pull-right">
+                  <!--<i class="fa fa-cc-paypal text-success"></i>-->
+                </div>
+                <h5 class="panel-title">
+                  Chèque
+                </h5>
+              </uib-accordion-heading>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h2 class="text-center">Merci de nous contacter pour activer vos licences</h2>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12">
+                    <button class="btn btn-info btn-rounded btn-outline btn-md pull-right" type="submit">
+                      <i class="glyphicon fa fa-envelope-o"></i>Envoyer
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </uib-accordion-group>
+          </uib-accordion>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

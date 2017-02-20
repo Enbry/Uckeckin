@@ -1,0 +1,83 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-md-8">
+      <h2>
+        Gains
+      </h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          <strong>Gains</strong>
+        </li>
+      </ol>
+    </div>
+    <div class="col-md-4 m-t-lg p-w-lg">
+      <input class="form-control" type="text" ng-model="vm.search" placeholder="Rechercher" ng-change="vm.figureOutItemsToDisplay()" />
+    </div>
+  </div>
+  <div class="wrapper animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox float-e-margins m-t-lg">
+          <div class="ibox-title">
+            <h5>Liste des gains</h5>
+            <div class="ibox-tools">
+              <a class="btn btn-primary btn-rounded" data-ui-sref="gains.create">
+                <i class="glyphicon glyphicon-plus"></i> Ajouter un gain
+              </a>
+            </div>
+          </div>
+          <div class="ibox-content project-list">
+            <table class="footable table table-striped toggle-arrow-tiny" data-page-size="8">
+              <thead>
+                <tr>
+                  <th class="text-center">ID</th>
+                  <th class="text-center">Nom</th>
+                  <th class="text-center">Signal</th>
+                  <th class="text-center">Date de début</th>
+                  <th class="text-center">Date de fin</th>
+                  <th class="text-center">Fréquence</th>
+                  <th class="text-center">Quota</th>
+                  <th class="text-center">Image</th>
+                  <th class="text-center">Icone</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="gain in vm.pagedItems" ng-if="vm.authentication.user._id === gain.user._id">
+                  <td class="text-center">{{loop.index}}</td>
+                  <td class="text-center" ng-bind="gain.gainName"></td>
+                  <td class="text-center"><button data-ui-sref="signals.view({signalId: gain.gainSignal._id})" class="btn btn-warning btn-rounded btn-sm">{{ gain.gainSignal.signalCode | uppercase }}</button></td>
+                  <td class="text-center">{{ gain.gainStartDate | date:"dd/MM/yy" }}</td>
+                  <td class="text-center">{{ gain.gainEndDate | date:"dd/MM/yy" }}</td>
+                  <td class="text-center" ng-bind="gain.gainFq"></td>
+                  <td class="text-center" ng-bind="gain.gainQuota"></td>
+                  <td class="text-center">
+                    <img src="{{ gain.gainPicture }}" width="50px" alt="Notification Picture">
+                  </td>
+                  <td class="text-center">
+                    <img ng-if="gain.gainIcon" width="50px" src="{{ gain.gainIcon }}" alt="Notification Icon">
+                  </td>
+                  <td class="text-center">
+                    <!--<button class="btn btn-warning btn-rounded btn-outline btn-sm" ui-sref="gains.view({gainId: gain._id})">
+                      <i class="glyphicon fa fa-eye"></i>Détails
+                    </button>-->
+                    <!--<button type="submit" ng-click="vm.remove()" class="btn btn-danger btn-rounded btn-outline btn-sm btn-gain">
+                      <i class="fa fa-trash"></i>Supprimer
+                    </button>-->
+                    <button class="btn btn-info btn-rounded btn-outline btn-sm" ui-sref="gains.edit({gainId: gain._id})">
+                      <i class="glyphicon glyphicon-pencil"></i>Modifier
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <uib-pagination class="pull-right space-15" rotate="true" force-ellipses="true" boundary-links="true" first-text="<<" last-text=">>" next-text=">" previous-text="<" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>

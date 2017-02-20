@@ -1,0 +1,90 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+      <h2>Statistiques</h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          <a data-ui-sref="stats.list">Statistiques</a>
+        </li>
+        <li class="active">
+          <strong>{{vm.stat._id ? 'Modifier un log' : 'Ajouter un log'}}</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-6 col-lg-offset-3 places-form-box">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title li-license-form">
+            <h5>{{vm.stat._id ? 'Modifier un log' : 'Ajouter un log'}}</h5>
+          </div>
+          <div class="ibox-content">
+            <form role="form" name="vm.form.statForm" class="form-horizontal" ng-submit="vm.save(vm.form.statForm.$valid)" novalidate>
+              <fieldset>
+                <div class="col-sm-6 b-r">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="form-group p-w-sm" show-errors>
+                        <label class="control-label" for="bundleIdentifier">Bundle Identifier</label>
+                        <input name="bundleIdentifier" type="text" ng-model="vm.stat.bundleIdentifier" id="bundleIdentifier" class="form-control" placeholder="Bundle Identifier">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="form-group p-w-sm" show-errors>
+                        <label class="control-label" for="logPlatform">Plate-forme</label>
+                        <input name="logPlatform" type="text" ng-model="vm.stat.logPlatform" id="Logplatform" class="form-control" placeholder="Plate-forme">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="form-group p-w-sm" show-errors>
+                        <label class="control-label" for="logModel">Modèle</label>
+                        <input name="logModel" type="text" ng-model="vm.stat.logModel" id="logModel" class="form-control" placeholder="Modèle">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="form-group p-w-sm" show-errors>
+                        <label class="control-label" for="logVersion">Version</label>
+                        <input name="logVersion" type="text" ng-model="vm.stat.logVersion" id="logVersion" class="form-control" placeholder="Version">
+                      </div>
+                    </div>
+                  </div>
+                  <!--<div class="row">
+                    <div class="form-group p-w-lg" show-errors>
+                      <label class="control-label" for="user">Client</label>
+                      <select style="width:100%" class="js-example-responsive" ui-select2 ng-model="vm.place.zone" id="zone" name="zone">
+                        <optgroup label="Sélectionner une zone">
+                          <option value="Zone 1">Zone 1</option>
+                          <option value="Zone 2">Zone 2</option>
+                          <option value="Zone 3">Zone 3</option>
+                        </optgroup>
+                      </select>
+                    </div>
+                  </div>-->
+                  <div ng-show="vm.error" class="text-danger">
+                    <strong ng-bind="vm.error"></strong>
+                  </div>
+                </div>
+                <div class="form-group p-w-sm">
+                  <button type="submit" ng-show="vm.place._id" ng-click="vm.remove()" class="m-t-md m-r-sm btn btn-danger btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-trash"></i>Supprimer</button>
+                  <button type="submit" class="m-t-md m-r-sm btn btn-primary btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-floppy-o"></i>{{vm.place._id ? 'Enregistrer' : 'Ajouter'}}</button>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

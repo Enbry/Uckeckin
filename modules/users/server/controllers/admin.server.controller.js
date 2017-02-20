@@ -1,0 +1,102 @@
+'use strict';
+
+/**
+ * Module dependencies.
+ */
+var path = require('path'),
+  mongoose = require('mongoose'),
+  User = mongoose.model('User'),
+  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+
+/**
+ * Show the current user
+ */
+exports.read = function (req, res) {
+  res.json(req.model);
+};
+
+/**
+ * Update a User
+ */
+exports.update = function (req, res) {
+  var user = req.model;
+
+  //For security purposes only merge these parameters
+  user.firstName = req.body.firstName;
+  user.lastName = req.body.lastName;
+  user.displayName = user.firstName + ' ' + user.lastName;
+  user.username = req.body.username;
+  user.roles = req.body.roles;
+  user.address = req.body.address;
+  user.zip_code = req.body.zip_code;
+  user.town = req.body.town;
+  user.country = req.body.country;
+  user.phone = req.body.phone;
+  user.company = req.body.company;
+  user.siret = req.body.siret;
+  user.tva_number = req.body.tva_number;
+
+
+
+  user.save(function (err) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
+    res.json(user);
+  });
+};
+
+/**
+ * Delete a user
+ */
+exports.delete = function (req, res) {
+  var user = req.model;
+
+  user.remove(function (err) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
+    res.json(user);
+  });
+};
+
+/**
+ * List of Users
+ */
+exports.list = function (req, res) {
+  User.find({}, '-salt -password').sort('-created').populate('user', 'displayName').exec(function (err, users) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
+
+    res.json(users);
+  });
+};
+
+/**
+ * User middleware
+ */
+exports.userByID = function (req, res, next, id) {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send({
+      message: 'User is invalid'
+    });
+  }
+
+  User.findById(id, '-salt -password').exec(function (err, user) {
+    if (err) {
+      return next(err);
+    } else if (!user) {
+      return next(new Error('Failed to load user ' + id));
+    }
+
+    req.model = user;
+    next();
+  });
+};

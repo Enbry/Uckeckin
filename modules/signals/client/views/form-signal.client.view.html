@@ -1,0 +1,85 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+      <h2></h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          <a data-ui-sref="licenses.list">Licences</a>
+        </li>
+        <li class="active">
+          <a data-ui-sref="signals.list">Signaux</a>
+        </li>
+        <li class="active">
+          <strong>{{vm.signal._id ? 'Modifier un signal' : 'Ajouter un signal'}}</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 signals-form-box">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title li-license-form">
+            <h5>{{vm.signal._id ? 'Modifier un signal' : 'Ajouter un signal'}}</h5>
+          </div>
+          <div class="ibox-content">
+            <form role="form" name="vm.form.signalForm" class="form-horizontal" ng-submit="vm.save(vm.form.signalForm.$valid)" novalidate>
+              <fieldset>
+                <div class="col-sm-12">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="form-group p-w-sm" show-errors>
+                        <label class="control-label" for="zoneName">ID du signal</label>
+                        <input name="signalID" type="text" ng-model="vm.signal.signalID" id="signalID" class="form-control" placeholder="ID">
+                        <div ng-messages="vm.signal.signalForm.title.$error" role="alert">
+                          <p class="help-block error-text" ng-message="required">Saisir un ID</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group p-w-lg" show-errors>
+                      <label class="control-label" for="signalLicense">Licence</label>
+                      <select style="width:100%" class="js-example-responsive" ui-select2 ng-model="vm.signal.signalLicenses._id" id="signalLicense" name="signalLicense">
+                        <optgroup label="Sélectionner une licence">
+                          <option ng-repeat="signalLicense in vm.signalLicenses" ng-if="vm.authentication.user._id === signalLicense.user._id" value="{{signalLicense._id}}">{{ signalLicense.licenseName }}</option>
+                        </optgroup>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row" ng-if="vm.hasBeacon">
+                    <div class="form-group p-w-lg" show-errors>
+                      <label class="control-label" for="signalBeacon">Beacon</label>
+                      <select style="width:100%" class="js-example-responsive" ui-select2 ng-model="vm.signal.signalBeacons._id" id="signalBeacon" name="signalBeacon">
+                        <optgroup label="Sélectionner un lieu">
+                          <option ng-repeat="signalBeacon in vm.signalBeacons" ng-if="vm.authentication.user._id === signalBeacon.user._id" value="{{signalBeacon._id}}">{{ signalBeacon.beaconName }}</option>
+                        </optgroup>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="form-group p-w-sm">
+                        <label class="control-label" for="signalStatus">Statut du signal</label>
+                        <!--<tags-input ng-model="tags" placeholder="Tags">
+                      </tags-input>-->
+                      <input name="signalStatus" type="text" ng-model="vm.signal.signalStatus" id="signalStatus" class="form-control" placeholder="Statut">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group p-w-sm">
+                <button type="submit" ng-show="vm.signal._id" ng-click="vm.remove()" class="m-t-md m-r-sm btn btn-danger btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-trash"></i>Supprimer</button>
+                <button type="submit" class="m-t-md m-r-sm btn btn-primary btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-floppy-o"></i>{{vm.signal._id ? 'Enregistrer' : 'Ajouter'}}</button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>

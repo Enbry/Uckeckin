@@ -1,0 +1,48 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+      <h2>Profil</h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          <strong>Profil</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="ibox">
+          <div class="ibox-content">
+            <h2>Profil</h2>
+            <div class="clients-list">
+              <ul class="nav nav-tabs">
+                <li ui-sref-active="active">
+                  <a ui-sref="settings.profile">Infos personnelles</a>
+                </li>
+                <li ui-sref-active="active" ng-show="vm.user.provider === 'local'">
+                  <a ui-sref="settings.password">Mot de passe</a>
+                </li>
+                <li ui-sref-active="active">
+                  <a ui-sref="settings.picture">Photo de profil</a>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane active">
+                  <div class="full-height-scroll" full-scroll>
+                    <div class="col-sm-12 col-md-12 settings-view">
+                      <div ui-view></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

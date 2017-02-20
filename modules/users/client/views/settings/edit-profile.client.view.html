@@ -1,0 +1,53 @@
+<section class="row">
+  <div class="col-xs-12 col-md-12 m-t-md">
+    <form name="vm.userForm" ng-submit="vm.updateUserProfile(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label for="firstName">Nom</label>
+          <input type="text" id="firstName" name="firstName" class="form-control" ng-model="vm.user.firstName" placeholder="Nom" required>
+          <div ng-messages="vm.userForm.firstName.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Veuillez saisir un nom</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="lastName">Prénom</label>
+          <input type="text" id="lastName" name="lastName" class="form-control" ng-model="vm.user.lastName" placeholder="Prénom" required>
+          <div ng-messages="vm.userForm.lastName.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Veuillez saisir un prénom</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" class="form-control" ng-model="vm.user.email" placeholder="Email" lowercase required>
+          <div ng-messages="vm.userForm.email.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Veuillez saisir une adresse mail</p>
+            <p class="help-block error-text" ng-message="email">Cette adresse mail est invalide</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="username">Nom d'utilisateur</label>
+          <input type="text" id="username" name="username" class="form-control" ng-model="vm.user.username" placeholder="Nom d'utilisateur" lowercase required>
+          <div ng-messages="vm.userForm.username.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Veuillez saisir un nom d'utilisateur.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="apiKey">API Key</label>
+          <input type="text" id="username" name="apiKey" class="form-control" ng-model="vm.user.apiKey" placeholder="API Key">
+          <div ng-messages="vm.userForm.apiKey.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Veuillez saisir une clé API</p>
+          </div>
+        </div>
+        <div class="text-center form-group">
+          <button type="submit" class="btn btn-primary pull-right">Enregistrer</button>
+        </div>
+        <div ng-show="vm.success" class="text-center text-success">
+          <strong>Profil enregistré avec succès</strong>
+        </div>
+        <div ng-show="vm.error" class="text-center text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,121 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+      <h2>Lieux</h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          <a data-ui-sref="areas.list">Lieux</a>
+        </li>
+        <li class="active">
+          <strong>{{ vm.area._id ? 'Modifier un lieu' : 'Ajouter un lieu' }}</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-sm-8 col-sm-offset-2 places-form-box">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title li-license-form">
+            <h5>{{ vm.area._id ? 'Modifier un lieu' : 'Ajouter un lieu' }}</h5>
+          </div>
+          <div class="ibox-content">
+            <form role="form" name="vm.form.placeForm" class="form-horizontal" ng-submit="vm.save(vm.form.placeForm.$valid)" novalidate>
+              <fieldset>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row map-address">
+                      <div class="col-md-3 map-title">
+                        Saisir une adresse:
+                      </div>
+                      <div class="col-md-9">
+                        <input places-auto-complete
+                        ng-model="vm.area.formatted_address"
+                        on-place-changed="vm.placeChanged()" class="map-input form-control" />
+                      </div>
+                    </div>
+                    <div class="row map">
+                      <div class="col-md-12">
+                        <ng-map center="[48.86,2.33]" zoom="13">
+                          <marker ng-if="vm.area._id"
+                          centered="true"
+                          position="[{{vm.area.placeLat}},{{vm.area.placeLng}}]"
+                          animation="Animation.BOUNCE"
+                          icon="{ url:'modules/core/client/img/marker.png' }">
+                        </marker>
+                      </ng-map>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 b-r">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="form-group p-w-sm" show-errors>
+                        <label class="control-label" for="placeName">Titre</label>
+                        <input name="placeName" type="text" ng-model="vm.area.placeName" id="placeName" class="form-control" placeholder="Titre" required>
+                        <div ng-messages="vm.form.areaForm.title.$error" role="alert">
+                          <p class="help-block error-text" ng-message="required">Saisir un titre</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="form-group p-w-sm" show-errors>
+                        <label class="control-label" for="placeDesc">Description</label>
+                        <input name="placeDesc" type="text" ng-model="vm.area.placeDesc" id="placeDesc" class="form-control" placeholder="Description">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="form-group p-w-sm">
+                        <label class="control-label" for="placeTags">Tags</label>
+                        <input name="placeTags" type="text" ng-model="vm.area.placeTags" id="placeTags" class="form-control" placeholder="Tags" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" ng-if="vm.hasZone">
+                    <div class="form-group p-w-lg" show-errors>
+                      <label class="control-label" for="zone">Zone</label>
+                      <select style="width:100%" class="js-example-responsive" ui-select2 ng-model="vm.area.zones._id" id="zone" name="zone">
+                        <optgroup label="Sélectionner une zone">
+                          <option ng-repeat="zone in vm.zones" ng-if="vm.authentication.user._id === zone.user._id" value="{{zone._id}}">{{ zone.zoneName }}</option>
+                        </optgroup>
+                      </select>
+                      <div class="m-t-sm pull-right">
+                        <a data-ui-sref="zones.create" class="text-muted"><i class="fa fa-plus-circle glyphicon"></i> Ajouter une zone</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" ng-if="!vm.hasZone">
+                    <div class="col-lg-12">
+                      <div class="row m-t-md">
+                        <a data-ui-sref="zones.create" class="text-muted add-zone"><i class="fa fa-plus-circle glyphicon"></i> Ajouter une zone</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div ng-show="vm.error" class="text-danger">
+                    <strong ng-bind="vm.error"></strong>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group p-w-sm">
+                <button type="submit" ng-show="vm.area._id" ng-click="vm.remove()" class="m-t-md btn btn-danger btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-trash"></i>Supprimer</button>
+                <button type="submit" class="m-t-md m-r-sm btn btn-primary btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-floppy-o"></i>{{vm.area._id ? 'Enregistrer' : 'Ajouter'}}</button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>

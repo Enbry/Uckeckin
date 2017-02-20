@@ -1,0 +1,99 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+      <h2>Beacons</h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          <a data-ui-sref="beacons.list">Beacons</a>
+        </li>
+        <li class="active">
+          <strong>Commande</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="ibox lic-li-box">
+          <div class="ibox-title">
+            <p class="pull-right" ng-show="vm.beacon.beaconAmount"><strong ng-model="vm.beacon.beaconAmount">{{ vm.beacon.beaconAmount }}</strong> beacon<span ng-if="vm.beacon.beaconAmount > 1">s</span></p>
+            <h5>Commander un beacon</h5>
+          </div>
+          <div class="ibox-content">
+            <div class="table-responsive">
+              <form role="form" name="vm.form.beaconForm" class="form-horizontal" ng-submit="vm.save(vm.form.beaconForm.$valid)" novalidate>
+                <fieldset>
+                  <table class="table shoping-cart-table">
+                    <tbody>
+                      <tr>
+                        <td class="desc">
+                          <div class="m-t-sm">
+                            <label class="control-label" for="beaconType">Type de beacon</label>
+                            <select style="width:50%" class="js-example-responsive" ui-select2 data-ng-model="vm.beacon.beaconType" id="beaconType" name="type" >
+                              <optgroup label="Sélectionner un type">
+                                <option>Third Party Beacon</option>
+                                <option>IBeacon</option>
+                                <option>Eddystone</option>
+                              </optgroup>
+                            </select>
+                          </div>
+                        </td>
+                        <td class="desc">
+                          <div class="m-t-sm">
+                            <label class="control-label" for="beaconQty">Quantité</label>
+                            <select class="js-example-responsive text-right" ng-model="vm.beacon.beaconTotalOrder" id="beaconQty" name="beaconQty">
+                              <optgroup label="">
+                                <option ng-repeat="beaconPrice in vm.beaconPrices" value="{{ beaconPrice.beaconTotalPrice }}">{{ beaconPrice.beaconQty }}</option>
+                              </optgroup>
+                            </select>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="m-t-sm">
+                    <div class="btn-group">
+                      <button type="submit" class="btn btn-primary btn-sm pull-right"><i class="fa fa-shopping-cart glyphicon"></i>Ajouter</button>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="ibox lic-li-box">
+          <div class="ibox-title">
+            <h5>Votre commande</h5>
+          </div>
+          <div class="ibox-content">
+            <span>
+              Produit
+            </span>
+            <h2 class="font-bold">
+              {{ vm.beacon.beaconType }} 
+            </h2>
+            <span>
+              Total
+            </span>
+            <h2 class="font-bold">
+              {{ vm.beacon.beaconTotalOrder }} €
+            </h2>
+            <hr/>
+            <div class="m-t-sm">
+              <div class="btn-group">
+                <button class="btn btn-primary btn-sm" ui-sref="beacons.order-checkout({beaconId: vm.beacon._id})"><i class="fa fa-shopping-cart glyphicon"></i>Valider la commande</button>
+                <a data-ui-sref="home" class="btn btn-white btn-sm"><i class="fa fa-undo glyphicon"></i>Annuler</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

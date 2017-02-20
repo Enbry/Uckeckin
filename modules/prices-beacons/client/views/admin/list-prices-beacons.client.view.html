@@ -1,0 +1,65 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-md-8">
+      <h2>
+        Beacons
+      </h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          <a data-ui-sref="home">Admin</a>
+        </li>
+        <li class="active">
+          <a data-ui-sref="admin.beacons.list">Beacons</a>
+        </li>
+        <li class="active">
+          <strong>Prix des beacons</strong>
+        </li>
+      </ol>
+    </div>
+    <div class="col-md-4 p-w-lg m-t-lg">
+      <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Rechercher" ng-change="vm.figureOutItemsToDisplay()" />
+    </div>
+  </div>
+  <div class="wrapper animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2">
+        <div class="ibox float-e-margins m-t-lg">
+          <div class="ibox-title">
+            <h5>Prix des beacons</h5>
+            <div class="ibox-tools">
+              <a class="btn btn-primary btn-rounded" data-ui-sref="admin.prices-beacons.create">
+                <i class="glyphicon glyphicon-plus"></i> Ajouter un prix de beacon
+              </a>
+            </div>
+          </div>
+          <div class="ibox-content project-list">
+            <table class="footable table table-striped toggle-arrow-tiny beacon-price-table" data-page-size="8">
+              <thead>
+                <tr>
+                  <th class="text-center" data-toggle="true">Quantité</th>
+                  <th class="text-center">Prix</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="text-center" ng-repeat="beaconPrice in vm.pagedItems">
+                  <td ng-bind="beaconPrice.beaconQty"></td>
+                  <td ng-bind="beaconPrice.beaconPrice"></td>
+                  <td>
+                    <button class="btn btn-info btn-rounded btn-outline btn-sm" ui-sref="admin.prices-beacons.edit({beaconPriceId: beaconPrice._id})">
+                      <i class="glyphicon glyphicon-pencil"></i>Modifier
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <uib-pagination class="pull-right space-15" rotate="true" force-ellipses="true" boundary-links="true" first-text="<<" last-text=">>" next-text=">" previous-text="<" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

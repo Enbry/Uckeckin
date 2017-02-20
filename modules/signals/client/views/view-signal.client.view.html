@@ -1,0 +1,200 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+      <h2>Licences</h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          <a data-ui-sref="licenses.list">Licences</a>
+        </li>
+        <li class="active">
+          <a data-ui-sref="signals.list">Signaux</a>
+        </li>
+        <li class="active">
+          <strong>Signal {{ vm.signal.signalCode | uppercase }}</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="ibox float-e-margins m-t-lg lic-li-box">
+          <div class="ibox-title">
+            <h5>Signal</h5>
+          </div>
+          <div class="ibox-content">
+            <div>
+              <div class="row m-b-lg">
+                <div class="col-lg-4 col-md-4">
+                  <dl class="dl-horizontal">
+                    <dt>Code:</dt>
+                    <dd>{{vm.signal.signalCode | uppercase}}</dd>
+                    <dt ng-show="vm.signal.signalBeacons" class="m-t-xs">Beacon:</dt>
+                    <dd ng-show="vm.signal.signalBeacons" class="m-t-xs"> {{vm.signal.signalBeacons.beaconName}}</dd>
+                    <dt class="m-t-xs">Dernière modification:</dt>
+                    <dd class="m-t-xs">{{ vm.signal.updated | date:"dd/MM/yyyy" }}</dd>
+                    <dt class="m-t-xs">Date de création:</dt>
+                    <dd class="m-t-xs">{{ vm.signal.created | date:"dd/MM/yyyy" }}</dd>
+                    <dt class="m-t-xs">Licence:</dt>
+                    <dd class="m-t-xs">{{ vm.signal.signalLicenses.licenseName }}</dd>
+                    <dt class="m-t-xs">Statut:</dt>
+                    <dd class="m-t-xs"><span class="label label-primary">{{ vm.signal.signalStatus }}</span></dd>
+                  </dl>
+                </div>
+                <div class="col-lg-8 b-l col-md-8">
+                  <div class="tabs-container">
+                    <uib-tabset>
+                      <uib-tab heading="Channel1">
+                        <div class="panel-body">
+                          <div class="col-lg-12">
+                            <div class="file">
+                              <span class="corner"></span>
+                              <div class="file-name">
+                                WAV
+                              </div>
+                              <div class="player">
+                                <audio controls="download"> <br>
+                                  <source src="modules/signals/client/sounds/C1-{{vm.signal.signalCode}}.wav" type="audio/wav" />
+                                </audio>
+                                <!--<div class="btn-player">
+                                <button ng-click="audioC1.paused ? audioC1.play() : audioC1.pause()">
+                                <i class="{{ audioC1.paused ? 'fa fa-play-circle-o' : 'fa fa-pause-circle-o' }}"></i>
+                              </button>
+                              <button ng-click="audioC1.restart()">
+                              <i class="fa fa-stop-circle-o"></i>
+                            </button>
+                          </div>
+                          <div>
+                          <label>Volume</label>
+                          <input class="form-control" type="range" min="0" max="1" step="0.01" ng-model="audioC1.volume">
+                        </div>
+                        <div>
+                        <input class="form-control" type="range" min="0" max="1" step="0.01" ng-model="audioC1.progress">
+                        <div class="text-center">{{ audioC1.currentTime | trackTime }}</div>
+                      </div>-->
+                    </div>
+                  </div>
+                  <div class="file">
+                    <span class="corner"></span>
+                    <div class="file-name">
+                      MP3
+                    </div>
+                    <div class="player">
+                      <audio controls="download"> <br>
+                        <source src="modules/signals/client/sounds/C1-{{vm.signal.signalCode}}.mp3" type="audio/mp3" />
+                      </audio>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </uib-tab>
+            <uib-tab heading="Channel2">
+              <div class="panel-body">
+                <div class="col-lg-12">
+                  <div class="file">
+                    <span class="corner"></span>
+                    <div class="file-name">
+                      WAV
+                    </div>
+                    <div class="player">
+                      <audio controls="download"> <br>
+                        <source src="modules/signals/client/sounds/C2-{{vm.signal.signalCode}}.wav" type="audio/wav" />
+                      </audio>
+                    </div>
+                  </div>
+                  <div class="file">
+                    <span class="corner"></span>
+                    <div class="file-name">
+                      MP3
+                    </div>
+                    <div class="player">
+                      <audio controls="download"> <br>
+                        <source src="modules/signals/client/sounds/C2-{{vm.signal.signalCode}}.mp3" type="audio/mp3" />
+                      </audio>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </uib-tab>
+            <uib-tab heading="Channel3">
+              <div class="panel-body">
+                <div class="col-lg-12">
+                  <div class="file">
+                    <span class="corner"></span>
+                    <div class="file-name">
+                      WAV
+                    </div>
+                    <div class="player">
+                      <audio controls="download"> <br>
+                        <source src="modules/signals/client/sounds/C3-{{vm.signal.signalCode}}.wav" type="audio/wav" />
+                      </audio>
+                    </div>
+                  </div>
+                  <div class="file">
+                    <span class="corner"></span>
+                    <div class="file-name">
+                      MP3
+                    </div>
+                    <div class="player">
+                      <audio controls="download"> <br>
+                        <source src="modules/signals/client/sounds/C3-{{vm.signal.signalCode}}.mp3" type="audio/mp3" />
+                      </audio>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </uib-tab>
+            <uib-tab heading="Channel4">
+              <div class="panel-body">
+                <div class="col-lg-12">
+                  <div class="file">
+                    <span class="corner"></span>
+                    <div class="file-name">
+                      WAV
+                    </div>
+                    <div class="player">
+                      <audio controls="download"> <br>
+                        <source src="modules/signals/client/sounds/C4-{{vm.signal.signalCode}}.wav" type="audio/wav" />
+                      </audio>
+                    </div>
+                  </div>
+                  <div class="file">
+                    <span class="corner"></span>
+                    <div class="file-name">
+                      MP3
+                    </div>
+                    <div class="player">
+                      <audio controls="download"> <br>
+                        <source src="modules/signals/client/sounds/C4-{{vm.signal.signalCode}}.mp3" type="audio/mp3" />
+                      </audio>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </uib-tab>
+          </uib-tabset>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12" id="cluster_info">
+        <h5>
+          <i>Pour chaque signal, Il existe plusieurs "Channel" correspondant à des fréquences plus ou moins haute.<br>
+            - Plus le channel est bas, plus la diffusion est facile via des devices de lectures audio classique (pour utiliser le channel 3, nous recommandons d’utiliser nos boîtiers disponible fin 2014). Plus le channel est élevé, moins il y a de chance qu'il soit le cas échéant entendu par les quelques % de la population française qui le peuvent (quand le signal est diffusé trop fort et sans être mixé à une bande sonore).<br>
+            - Vous pouvez utiliser le channel 1 pour les tests de détection simple. Vous pouvez choisir de détecter en parallèle des signaux sur plusieurs channels (jusqu'à trois). La détection sur plusieurs channel n'est nécessaire que lorsque qu'il faut détecter plusieurs signaux en même temps. Nous recommandons de ne pas l'utiliser dans les autres cas.<br>
+            - En utilisant deux signaux du même Channel, le SDK détectera en priorité le signal perçu le plus fort. En utilisant deux ou trois signaux de channels différents, l'ensemble des signaux seront détectés en parallèle.<br>
+            - Le fichier XML comporte les options de paramétrage correspondant à ces fonctionnalités
+          </i>
+        </h5>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>

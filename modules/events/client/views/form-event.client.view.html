@@ -1,0 +1,329 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+      <h2>Événements</h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          <a data-ui-sref="events.list">Événements</a>
+        </li>
+        <li class="active">
+          <strong>{{vm.evt._id ? 'Modifier l\'événement' : 'Ajouter un événement'}}</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 events-form-box">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title li-gain-form">
+            <h5>{{vm.evt._id ? 'Modifier l\'événement' : 'Ajouter un événement'}}
+            </h5>
+          </div>
+          <div class="ibox-content">
+            <div class="tabs-container">
+              <uib-tabset>
+                <uib-tab heading="Paramètres">
+                  <div class="panel-body">
+                    <form role="form" name="vm.form.eventForm" class="form-horizontal" ng-submit="vm.save(vm.form.eventForm.$valid)" novalidate>
+                      <fieldset>
+                        <div class="row">
+                          <div class="col-sm-6 b-r">
+                            <div class="row">
+                              <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+                                <div class="form-group gain-form-l" show-errors>
+                                  <label class="control-label" for="eventName">Nom</label>
+                                  <input name="eventName" type="text" ng-model="vm.evt.eventName" id="eventName" class="form-control" placeholder="Nom" required>
+                                  <div ng-messages="vm.form.eventForm.title.$error" role="alert">
+                                    <p class="help-block error-text" ng-message="required">Saisir un nom</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+                                <div class="form-group gain-form-l" show-errors>
+                                  <label class="control-label" for="eventShortDesc">Description courte</label>
+                                  <input name="eventShortDesc" type="text" ng-model="vm.evt.eventShortDesc" id="eventShortDesc" class="form-control" placeholder="Description courte">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+                                <div class="form-group gain-form-l" show-errors>
+                                  <label class="control-label" for="eventLongDesc">Description longue</label>
+                                  <textarea name="eventLongDesc" ng-model="vm.evt.eventLongDesc" id="eventLongDesc" class="form-control" placeholder="Description longue"></textarea>
+                                </div>
+                              </div>
+                            </div>
+                            <div ng-show="vm.error" class="text-danger">
+                              <strong ng-bind="vm.error"></strong>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                              <button type="submit" ng-show="vm.evt._id" ng-click="vm.remove()" class="m-t-xl m-r-sm btn btn-danger btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-trash"></i>Supprimer</button>
+                              <button type="submit" class="m-t-xl m-r-sm btn btn-primary btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-floppy-o"></i>{{vm.evt._id ? 'Enregistrer' : 'Ajouter'}}</button>
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </form>
+                  </div>
+                </uib-tab>
+                <uib-tab heading="Contenu">
+                  <div class="panel-body">
+
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6 col-sm-6 b-r">
+                        <div class="row">
+                          <div class="col-lg-10 col-md-10">
+                            <div class="form-group gain-form-r">
+                              <label class="control-label" for="picture">Image</label><br />
+                              <input filepicker type="filepicker" data-fp-services="computer" on-success="onSuccess(event.fpfile)" data-fp-container="modal" data-fp-button-class="btn btn-success" />
+
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <div class="row" ng-repeat="evtPicture in vm.eventPicture">
+                                    <img ng-src="{{ evtPicture.url }}" ng-model="vm.eventPicture"/>
+                                  </div>
+                                </div>
+                              </div>
+                              <!--<div class="row">
+                                <div class="col-sm-12">
+                                  <h3>Raw data</h3>
+                                  <pre>{{files | json}}</pre>
+                                </div>
+                              </div>-->
+                            </div>
+                          </div>
+                        </div>
+
+
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="row">
+                          <div class="col-lg-10 col-md-10">
+                            <div class="form-group gain-form-r">
+                              <label class="control-label" for="icon">Icone</label>
+
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <form role="form" name="vm.form.eventForm" class="form-horizontal" ng-submit="vm.save(vm.form.eventForm.$valid)" novalidate>
+                      <fieldset>
+                        <div class="row">
+                          <div class="col-lg-12 col-mds-12 col-sm-12">
+                            <div class="sample">
+                              <h2>Contenu HTML</h2>
+                              <textarea froala ng-model="vm.evt.eventContent"></textarea>
+                              <h4>Aperçu:</h4>
+                              <div froala-view="vm.evt.eventContent"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                              <button type="submit" ng-show="vm.evt._id" ng-click="vm.remove()" class="m-t-xl m-r-sm btn btn-danger btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-trash"></i>Supprimer</button>
+                              <button type="submit" class="m-t-xl m-r-sm btn btn-primary btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-floppy-o"></i>{{vm.evt._id ? 'Enregistrer' : 'Ajouter'}}</button>
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </form>
+                  </div>
+                </uib-tab>
+                <uib-tab heading="Segment">
+                  <div class="panel-body">
+                    <form role="form" name="vm.form.eventForm" class="form-horizontal" ng-submit="vm.save(vm.form.eventForm.$valid)" novalidate>
+                      <fieldset>
+                        <div class="row" ng-show="vm.hasSignal">
+                          <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2">
+                            <div class="row">
+                              <div class="col-lg-12">
+                                <div class="form-group gain-form-r" show-errors>
+                                  <label class="control-label" for="signal">Signal de l'événement</label>
+                                  <select style="width:100%" class="js-example-responsive" ui-select2 ng-model="vm.evt.eventSignal._id" id="eventSignal" name="eventSignal">
+                                    <optgroup label="Sélectionner un signal">
+                                      <option ng-repeat="eventSignal in vm.eventSignals" ng-if="vm.authentication.user._id === eventSignal.user._id" value="{{eventSignal._id}}">{{ eventSignal.signalCode | uppercase }}</option>
+                                    </optgroup>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row" ng-if="!vm.hasSignal">
+                          <div class="col-lg-12">
+                            <div class="row m-t-xl">
+                              <a data-ui-sref="signals.create" class="text-muted add-zone"><i class="fa fa-plus-circle glyphicon"></i> Ajouter un signal</a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12 col-lg-12">
+                            <div class="form-group">
+                              <button type="submit" ng-show="vm.evt._id" ng-click="vm.remove()" class="m-t-xl m-r-sm btn btn-danger btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-trash"></i>Supprimer</button>
+                              <button type="submit" class="m-t-xl m-r-sm btn btn-primary btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-floppy-o"></i>{{vm.evt._id ? 'Enregistrer' : 'Ajouter'}}</button>
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </form>
+                  </div>
+                </uib-tab>
+                <uib-tab heading="Planification">
+                  <div class="panel-body">
+                    <form role="form" name="vm.form.eventForm" class="form-horizontal gain-form" ng-submit="vm.save(vm.form.eventForm.$valid)" novalidate>
+                      <fieldset>
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                          <div class="row">
+                            <uib-accordion class="panel-group">
+                              <uib-accordion-group is-open="true">
+                                <uib-accordion-heading>
+                                  <h5 class="panel-title">
+                                    Validité de l'événement
+                                  </h5>
+                                </uib-accordion-heading>
+                                <div class="col-lg-6 col-md-6">
+                                  <div class="form-group gain-form-l gain-form-r">
+                                    <label class="control-label reg-label" for="eventStartDate">Du</label>
+                                    <div class="input-group">
+                                      <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="fa fa-calendar-plus-o"></i></button>
+                                      </span>
+                                      <input type="text" class="form-control" show-button-bar ="false" datepicker-options="inlineOptions" uib-datepicker-popup="dd/MM/yyyy" ng-model="vm.evt.eventStartDate" is-open="popup1.opened" ng-required="true" close-text="Close" ng-click="open1()"/>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                  <div class="form-group gain-form-l gain-form-r">
+                                    <label class="control-label reg-label" for="eventEndDate">Au</label>
+                                    <div class="input-group">
+                                      <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open2()"><i class="fa fa-calendar-plus-o"></i></button>
+                                      </span>
+                                      <input show-button-bar ="false" datepicker-options="inlineOptions" type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="vm.evt.eventEndDate" is-open="popup2.opened" ng-required="true" close-text="Close" ng-click="open2()"/>
+                                    </div>
+                                  </div>
+                                </div>
+                              </uib-accordion-group>
+                              <uib-accordion-group is-open="false">
+                                <uib-accordion-heading>
+                                  <h5 class="panel-title">
+                                    Publication de l'événement
+                                  </h5>
+                                </uib-accordion-heading>
+                                <div class="row">
+                                  <div class="col-lg-6 col-md-6">
+                                    <div class="form-group gain-form-l gain-form-r">
+                                      <label class="control-label reg-label" for="eventPublishStartDate">Du</label>
+                                      <div class="input-group">
+                                        <span class="input-group-btn">
+                                          <button type="button" class="btn btn-default" ng-click="open1()"><i class="fa fa-calendar-plus-o"></i></button>
+                                        </span>
+                                        <input type="text" date-disabled="disabled(date, mode)" class="form-control" datepicker-options="inlineOptions" show-button-bar ="false" uib-datepicker-popup="dd/MM/yyyy" ng-model="vm.evt.eventPublishStartDate" is-open="popup1.opened" ng-required="true" close-text="Close" ng-click="open1()"/>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 col-md-6">
+                                    <div class="form-group gain-form-l gain-form-r">
+                                      <label class="control-label reg-label" for="eventPublishEndDate">Au</label>
+                                      <div class="input-group">
+                                        <span class="input-group-btn">
+                                          <button type="button" class="btn btn-default" ng-click="open2()"><i class="fa fa-calendar-plus-o"></i></button>
+                                        </span>
+                                        <input type="text" class="form-control" datepicker-options="inlineOptions" show-button-bar ="false" uib-datepicker-popup="dd/MM/yyyy" ng-model="vm.evt.eventPublishEndDate" is-open="popup2.opened" ng-required="true" close-text="Close" ng-click="open2()"/>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </uib-accordion-group>
+
+                              <uib-accordion-group is-open="false">
+                                <uib-accordion-heading>
+                                  <h5 class="panel-title">
+                                    Gestion des affichages
+                                  </h5>
+                                </uib-accordion-heading>
+                                <div class="row">
+                                  <div class="col-lg-12 col-md-12">
+                                    <div>
+                                      <label class="reg-label">
+                                        <input icheck type="checkbox" ng-model="vm.evt.eventPrivacy"> Rendre cet événement privé
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </uib-accordion-group>
+                            </uib-accordion>
+                            <div class="form-group">
+                              <button type="submit" ng-show="vm.evt._id" ng-click="vm.remove()" class="m-t-xl m-r-sm btn btn-danger btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-trash"></i>Supprimer</button>
+                              <button type="submit" class="m-t-xl m-r-sm btn btn-primary btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-floppy-o"></i>{{vm.evt._id ? 'Enregistrer' : 'Ajouter'}}</button>
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </form>
+                  </div>
+                </uib-tab>
+                <uib-tab heading="Localisation">
+                  <div class="panel-body">
+                    <form role="form" name="vm.form.eventForm" class="form-horizontal" ng-submit="vm.save(vm.form.eventForm.$valid)" novalidate>
+                      <fieldset>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="row map-address">
+                              <div class="col-md-3 map-title">
+                                Saisir une adresse:
+                              </div>
+                              <div class="col-md-9">
+                                <input places-auto-complete
+                                ng-model="vm.evt.formatted_address"
+                                on-place-changed="vm.placeChanged()" class="map-input form-control" />
+                              </div>
+                            </div>
+                            <div class="row map">
+                              <div class="col-md-12">
+                                <ng-map center="[48.86,2.33]" zoom="13">
+                                  <marker ng-if="vm.evt._id"
+                                  centered="true"
+                                  position="[{{vm.evt.eventLat}},{{vm.evt.eventLng}}]"
+                                  animation="Animation.BOUNCE"
+                                  icon="{ url:'modules/core/client/img/marker.png' }">
+                                </marker>
+                              </ng-map>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                          <div class="form-group">
+                            <button type="submit" ng-show="vm.evt._id" ng-click="vm.remove()" class="m-t-xl m-r-sm btn btn-danger btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-trash"></i>Supprimer</button>
+                            <button type="submit" class="m-t-xl m-r-sm btn btn-primary btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-floppy-o"></i>{{vm.evt._id ? 'Enregistrer' : 'Ajouter'}}</button>
+                          </div>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </form>
+                </div>
+              </uib-tab>
+            </uib-tabset>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>

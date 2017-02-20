@@ -1,0 +1,68 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-md-8">
+      <h2>
+        Zones
+      </h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          <strong>Zones</strong>
+        </li>
+      </ol>
+    </div>
+    <div class="col-md-4 m-t-lg p-w-lg">
+      <input class="form-control" type="text" ng-model="vm.search" placeholder="Rechercher" ng-change="vm.figureOutItemsToDisplay()" />
+    </div>
+  </div>
+  <div class="wrapper animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox float-e-margins m-t-lg zones-box">
+          <div class="ibox-title">
+            <h5>Liste des zones</h5>
+            <div class="ibox-tools">
+              <a class="btn btn-primary btn-rounded" data-ui-sref="zones.create">
+                <i class="glyphicon glyphicon-plus"></i> Ajouter une zone
+              </a>
+            </div>
+          </div>
+          <div class="ibox-content project-list">
+            <table class="footable table table-striped toggle-arrow-tiny" data-page-size="8">
+              <thead>
+                <tr>
+                  <th class="text-center" data-toggle="true">Titre</th>
+                  <th class="text-center">Tags</th>
+                  <th class="text-center">Lieu</th>
+                  <th class="text-center">Statut</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="zone in vm.pagedItems" ng-if="vm.authentication.user._id === zone.user._id">
+                  <td class="text-center" ng-bind="zone.zoneName"></td>
+                  <td class="text-center" ng-bind="zone.zoneTags"></td>
+                  <td ng-if="vm.hasArea && zone.places.placeName" class="text-center" ng-bind="zone.places.placeName"></td>
+                  <td ng-if="vm.hasArea && !zone.places.placeName" class="text-center no-zone">
+                    Lieu non défini
+                  </td>
+                  <td ng-if="!vm.hasArea" class="text-center">
+                    <a data-ui-sref="areas.create" class="text-muted"><i class="glyphicon fa fa-plus-circle fa-2x"></i></a>
+                  </td>
+                  <td class="text-center" ng-bind="zone.zoneStatus"></td>
+                  <td class="text-center">
+                    <button class="btn btn-info btn-rounded btn-outline btn-sm btn-mod" ui-sref="zones.edit({zoneId: zone._id})">
+                      <i class="glyphicon fa fa-pencil"></i>Modifier
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <uib-pagination class="pull-right space-15" rotate="true" force-ellipses="true" boundary-links="true" first-text="<<" last-text=">>" next-text=">" previous-text="<" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

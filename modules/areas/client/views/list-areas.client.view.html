@@ -1,0 +1,75 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-md-8">
+      <h2>
+        Lieux
+      </h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          <strong>Lieux</strong>
+        </li>
+      </ol>
+    </div>
+    <div class="col-md-4 m-t-lg p-w-lg">
+      <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Rechercher" ng-change="vm.figureOutItemsToDisplay()" />
+    </div>
+  </div>
+  <div class="wrapper animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox float-e-margins m-t-lg places-box">
+          <div class="ibox-title">
+            <h5>Liste des lieux</h5>
+            <div class="ibox-tools">
+              <a class="btn btn-primary btn-rounded" data-ui-sref="areas.create">
+                <i class="glyphicon glyphicon-plus"></i> Ajouter un lieu
+              </a>
+            </div>
+          </div>
+          <div class="ibox-content project-list">
+            <table class="footable table table-striped toggle-arrow-tiny places-table" data-page-size="8">
+              <thead>
+                <tr>
+                  <th class="text-center" data-toggle="true">Titre</th>
+                  <th class="text-center">Description</th>
+                  <th class="text-center">Tags</th>
+                  <th class="text-center">Statut</th>
+                  <th class="text-center">Zones</th>
+                  <th class="text-center">Adresse</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="area in vm.pagedItems" ng-if="vm.authentication.user._id === area.user._id">
+                  <td class="text-center" ng-bind="area.placeName"></td>
+                  <td class="text-center" ng-bind="area.placeDesc"></td>
+                  <td class="text-center" ng-bind="area.placeTags"></td>
+                  <td class="text-center" ng-bind="area.placeStatus"></td>
+                  <td ng-if="vm.hasZone && area.zones.zoneName" class="text-center" ng-bind="area.zones.zoneName"></td>
+                  <td ng-if="vm.hasZone && !area.zones.zoneName" class="text-center no-zone">
+                    Zone non définie
+                  </td>
+                  <td ng-if="!vm.hasZone" class="text-center">
+                    <a data-ui-sref="zones.create" class="text-muted"><i class="glyphicon fa fa-plus-circle fa-2x"></i></a>
+                  </td>
+                  <td class="text-center" ng-bind="area.formatted_address"></td>
+                  <td class="text-center">
+                    <!--<button class="btn btn-warning btn-rounded btn-outline btn-md" ui-sref="places.view({placeId: place._id})">
+                    <i class="glyphicon glyphicon-eye-open"></i>Voir
+                  </button>-->
+                  <button class="btn btn-info btn-rounded btn-outline btn-sm btn-mod" ui-sref="areas.edit({areaId: area._id})">
+                    <i class="glyphicon glyphicon-pencil"></i>Modifier
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <uib-pagination class="pull-right space-15" rotate="true" force-ellipses="true" boundary-links="true" first-text="<<" last-text=">>" next-text=">" previous-text="<" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,91 @@
+<section>
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-6">
+        <h1>{{vm.user.username | uppercase}}</h1>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-3"><strong>Nom</strong></div>
+        <div class="col-md-6" ng-bind="vm.user.firstName"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Prénom</strong></div>
+        <div class="col-md-6" ng-bind="vm.user.lastName"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Entreprise</strong></div>
+        <div class="col-md-6" ng-bind="vm.user.company"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Email</strong></div>
+        <div class="col-md-6" ng-bind="vm.user.email"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Adresse</strong></div>
+        <div class="col-md-6">
+          <p ng-bind="vm.user.address"></p>
+          <p ng-bind="vm.user.zip_code"></p>
+          <p ng-bind="vm.user.town"></p>
+          <p ng-bind="vm.user.country"></p>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Numéro de téléphone</strong></div>
+        <div class="col-md-6" ng-bind="vm.user.phone"></div>
+      </div>
+      <hr/>
+      <!--<div class="row">
+        <div class="col-md-3"><strong>Provider</strong></div>
+        <div class="col-md-6" ng-bind="vm.user.provider"></div>
+      </div>
+      <hr/>-->
+      <div class="row">
+        <div class="col-md-3"><strong>Date d'inscription</strong></div>
+        <div class="col-md-6">{{ vm.user.created | date:"dd/MM/yyyy 'à' H:mm" }}</div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Rôle</strong></div>
+        <div class="col-md-6" ng-bind="vm.user.roles"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>API Key</strong></div>
+        <div class="col-md-6" ng-bind="vm.user.apiKey"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>Numéro de SIRET</strong></div>
+        <div class="col-md-6" ng-bind="vm.user.siret"></div>
+      </div>
+      <hr/>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>TVA Number</strong></div>
+        <div class="col-md-6" ng-bind="vm.user.tva_number"></div>
+      </div>
+      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 col-md-offset-9">
+      <a class="btn btn-info btn-rounded m-t-md" ui-sref="admin.user-edit({userId: vm.user._id})">
+        <i class="glyphicon glyphicon-edit"></i>Éditer
+      </a>
+      <a class="btn btn-danger btn-rounded m-t-md" ng-click="vm.remove()">
+        <i class="glyphicon glyphicon-trash"></i>Supprimer
+      </a>
+    </div>
+  </div>
+</section>

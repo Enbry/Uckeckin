@@ -1,0 +1,82 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+      <h2>Licences</h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          Admin
+        </li>
+        <li class="active">
+          <strong>Licences</strong>
+        </li>
+      </ol>
+    </div>
+    <div class="col-md-4 m-t-lg p-w-lg">
+    <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Rechercher" ng-change="vm.figureOutItemsToDisplay()" />
+  </div>
+</div>
+
+<div class="wrapper animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins m-t-lg lic-li-box">
+        <div class="ibox-title">
+          <h5>Liste des licences</h5>
+          <div class="ibox-tools">
+            <a class="btn btn-primary btn-rounded" data-ui-sref="admin.licenses.create">
+              <i class="glyphicon glyphicon-plus"></i> Ajouter une licence
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content project-list">
+          <table class="footable table table-striped toggle-arrow-tiny" data-page-size="8">
+            <thead>
+              <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">Client</th>
+                <th class="text-center">Signal</th>
+                <th class="text-center">Lieu</th>
+                <th class="text-center">Zone</th>
+                <th class="text-center">Date</th>
+                <th class="text-center">Type</th>
+                <th class="text-center">Beacon</th>
+                <th class="text-center">Statut</th>
+                <th class="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="license in vm.pagedItems" class="text-center">
+                <td ng-bind="license.licenseName"></td>
+                <td ng-bind="license.user.displayName"></td>
+                <td>{{ license.signal | uppercase}}</td>
+                <td ng-bind="license.place"></td>
+                <td ng-bind="license.zone"></td>
+                <td>{{ license.created | date:"dd/MM/yyyy" }}</td>
+                <td ng-bind="license.licenseType"></td>
+                <td ng-bind="license.beacon"></td>
+                <td ng-bind="license.licenseStatus"></td>
+                <td>
+                  <!--<a class="btn btn-primary" data-ui-sref="admin.licenses.edit({licenseId: license._id})">
+                  <i class="glyphicon glyphicon-edit"></i>
+                </a>
+                <a ng-show="license._id" class="btn btn-primary" ng-click="remove()">
+                <i class="glyphicon glyphicon-trash"></i>
+              </a>-->
+              <button class="btn btn-info btn-rounded btn-outline btn-sm" ui-sref="admin.licenses.edit({licenseId: license._id})">
+                <i class="glyphicon glyphicon-pencil"></i>Modifier
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <uib-pagination class="pull-right space-15" rotate="true" force-ellipses="true" boundary-links="true" first-text="<<" last-text=">>" next-text=">" previous-text="<" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+</section>

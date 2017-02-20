@@ -1,0 +1,109 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-md-8">
+      <h2>
+        Événements
+      </h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          <strong>Événements</strong>
+        </li>
+      </ol>
+    </div>
+    <div class="col-md-4 m-t-lg p-w-lg">
+      <input class="form-control" type="text" ng-model="vm.search" placeholder="Rechercher" ng-change="vm.figureOutItemsToDisplay()" />
+    </div>
+  </div>
+  <div class="wrapper animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox float-e-margins m-t-lg">
+          <div class="ibox-title">
+            <h5>Liste des événements</h5>
+            <div class="ibox-tools">
+              <a class="btn btn-primary btn-rounded" data-ui-sref="events.create">
+                <i class="glyphicon glyphicon-plus"></i> Ajouter un événement
+              </a>
+            </div>
+          </div>
+          <div class="ibox-content project-list">
+            <div ng-repeat="evt in vm.pagedItems" ng-if="vm.authentication.user._id === evt.user._id" class="col-md-8 col-md-offset-2">
+              <div class="ibox ibox-event">
+                <div class="ibox-title">
+                  <span ng-show="evt.eventPrivacy == true" class="label label-primary pull-right">Privé</span>
+                  <span ng-show="evt.eventPrivacy == false" class="label label-primary pull-right">Pubic</span>
+                  <h5 ng-bind="evt.eventName"></h5>
+                </div>
+                <div class="ibox-content">
+                  <div class="team-members">
+                    <img alt="member" class="img-circle" ng-src="{{ vm.evt.eventPicture }}" ng-model="evt.eventPicture">
+                    <img alt="member" class="img-circle" src="{{ evt.eventIcon }}">
+                  </div>
+                  <h4>{{ evt.eventShortDesc }}</h4>
+                  <p>{{ evt.eventLongDesc }}</p>
+                  <div class="row m-t-sm">
+                    <div class="col-sm-4">
+                      <div class="font-bold">SIGNAL</div>
+                      <button data-ui-sref="signals.view({signalId: evt.eventSignal._id})" class="btn btn-warning btn-rounded btn-sm">{{ evt.eventSignal.signalCode | uppercase }}</button>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="font-bold">LIEU</div>
+                      {{ evt.formatted_address }}
+                    </div>
+                  </div>
+                </div>
+                <div class="ibox-title ibox-edit-event">
+                  <span class="pull-right">
+                    <button class="btn btn-info btn-rounded btn-outline btn-sm" ui-sref="events.edit({eventId: evt._id})">
+                      <i class="glyphicon glyphicon-pencil"></i>Modifier
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--<table class="footable table table-striped toggle-arrow-tiny" data-page-size="8">
+          <thead>
+          <tr>
+          <th class="text-center">ID</th>
+          <th class="text-center">Nom</th>
+          <th class="text-center">Signal</th>
+          <th class="text-center">Date de début</th>
+          <th class="text-center">Date de fin</th>
+          <th class="text-center">Image</th>
+          <th class="text-center">Icone</th>
+          <th class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="evt in vm.pagedItems" ng-if="vm.authentication.user._id === evt.user._id">
+      <td class="text-center">{{loop.index}}</td>
+      <td class="text-center" ng-bind="evt.eventName"></td>
+      <td class="text-center">{{ evt.eventSignal ? 'evt.eventSignal' : 'Aucun signal associé' }}</td>
+      <td class="text-center">{{ evt.eventStartDate | date:"dd/MM/yy" }}</td>
+      <td class="text-center">{{ evt.eventEndDate | date:"dd/MM/yy" }}</td>
+      <td class="text-center">
+      <img src="{{ evt.eventPicture }}" width="50px" alt="Notification Picture">
+    </td>
+    <td class="text-center">
+    <img ng-if="evt.eventIcon" width="50px" src="{{ evt.eventIcon }}" alt="Notification Icon">
+  </td>
+  <td class="text-center">
+  <a class="btn btn-info btn-rounded btn-outline btn-sm" ui-sref="events.edit({eventId: evt._id})">
+  <i class="glyphicon glyphicon-pencil"></i>Modifier
+</a>
+</td>
+</tr>
+</tbody>
+</table>-->
+<uib-pagination class="pull-right space-15" rotate="true" force-ellipses="true" boundary-links="true" first-text="<<" last-text=">>" next-text=">" previous-text="<" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>

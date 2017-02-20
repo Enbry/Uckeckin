@@ -1,0 +1,67 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+      <h2>Beacons</h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          <a data-ui-sref="home">Admin</a>
+        </li>
+        <li class="active">
+          <a data-ui-sref="admin.beacons.list">Beacons</a>
+        </li>
+        <li class="active">
+          <a data-ui-sref="admin.prices-beacons.list">Prix des beacons</a>
+        </li>
+        <li class="active">
+          <strong>{{vm.beaconPrice._id ? 'Modifier le prix du beacon' : 'Ajouter un prix de beacon'}}</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 lic-form-box">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title li-license-form">
+            <h5>{{vm.beaconPrice._id ? 'Modifier le prix du beacon' : 'Ajouter un prix de beacon'}}</h5>
+          </div>
+          <div class="ibox-content">
+            <form role="form" name="vm.form.beaconPriceForm" class="form-horizontal" ng-submit="vm.save(vm.form.beaconPriceForm.$valid)" novalidate>
+              <fieldset>
+                <div class="col-sm-12">
+                  <div class="row">
+                    <div class="form-group p-w-sm" show-errors>
+                      <label class="control-label" for="quantity">Quantité</label>
+                      <input name="quantity" type="number" ng-model="vm.beaconPrice.beaconQty" id="beaconQty" class="form-control" placeholder="Quantité" required>
+                      <div ng-messages="vm.form.beaconPriceForm.title.$error" role="alert">
+                        <p class="help-block error-text" ng-message="required">Saisir une quantité</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group p-w-sm">
+                      <label class="control-label" for="unit_price">Prix unitaire</label>
+                      <input type="number" name="unit_price" data-ng-model="vm.beaconPrice.beaconPrice" id="unit_price" class="form-control" cols="30" rows="10" placeholder="Prix unitaire" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group p-w-sm">
+                      <button type="submit" ng-show="vm.beaconPrice._id" ng-click="vm.remove()" class="btn btn-danger btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-trash-o"></i>Supprimer</button>
+                      <button type="submit" class="btn btn-primary btn-rounded btn-outline btn-md pull-right m-r-sm"><i class="glyphicon fa fa-floppy-o"></i>{{vm.beaconPrice._id ? 'Enregistrer' : 'Ajouter'}}</button>
+                    </div>
+                  </div>
+                  <div ng-show="vm.error" class="text-danger">
+                    <strong ng-bind="vm.error"></strong>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,301 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+      <h2>Gains</h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          <a data-ui-sref="gains.list">Gains</a>
+        </li>
+        <li class="active">
+          <strong>{{vm.gain._id ? 'Modifier le gain' : 'Ajouter un gain'}}</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 gains-form-box">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title li-gain-form">
+            <h5>{{vm.gain._id ? 'Modifier le gain' : 'Ajouter un gain'}}
+            </h5>
+          </div>
+          <div class="ibox-content">
+            <div class="tabs-container">
+              <uib-tabset>
+                <uib-tab heading="Paramètres">
+                  <div class="panel-body">
+                    <form role="form" name="vm.form.gainForm" class="form-horizontal" ng-submit="vm.save(vm.form.gainForm.$valid)" novalidate>
+                      <fieldset>
+                        <div class="row">
+                          <div class="col-sm-6 b-r">
+                            <div class="row">
+                              <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+                                <div class="form-group gain-form-l" show-errors>
+                                  <label class="control-label" for="gainName">Nom</label>
+                                  <input name="gainName" type="text" ng-model="vm.gain.gainName" id="gainName" class="form-control" placeholder="Nom" required>
+                                  <div ng-messages="vm.form.gainForm.title.$error" role="alert">
+                                    <p class="help-block error-text" ng-message="required">Saisir un nom</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+                                <div class="form-group gain-form-l" show-errors>
+                                  <label class="control-label" for="gainDesc">Description</label>
+                                  <input name="gainDesc" type="text" ng-model="vm.gain.gainDesc" id="gainDesc" class="form-control" placeholder="Description">
+                                </div>
+                              </div>
+                            </div>
+                            <div ng-show="vm.error" class="text-danger">
+                              <strong ng-bind="vm.error"></strong>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                              <button type="submit" ng-show="vm.gain._id" ng-click="vm.remove()" class="m-t-xl m-r-sm btn btn-danger btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-trash"></i>Supprimer</button>
+                              <button type="submit" class="m-t-xl m-r-sm btn btn-primary btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-floppy-o"></i>{{vm.gain._id ? 'Enregistrer' : 'Ajouter'}}</button>
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </form>
+                  </div>
+                </uib-tab>
+                <uib-tab heading="Contenu">
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group text-center">
+                          <img ng-src="{{imageURL}}" alt="{{vm.gain.gainName}}" class="img-thumbnail user-profile-picture">
+                        </div>
+                        <div class="text-center form-group" ng-hide="uploader.queue.length">
+                          <span class="btn btn-default btn-file">
+                            Sélectionner une image <input type="file" nv-file-select uploader="uploader">
+                          </span>
+                        </div>
+                        <div class="text-center form-group" ng-show="uploader.queue.length">
+                          <button class="btn btn-primary" ng-click="uploadGainPicture();">Télécharger</button>
+                          <button class="btn btn-default" ng-click="cancelUpload();">Annuler</button>
+                        </div>
+                        <div ng-show="success" class="text-center text-success">
+                          <strong>Image du gain mise à jour</strong>
+                        </div>
+                        <div ng-show="error" class="text-center text-danger">
+                          <strong ng-bind="error"></strong>
+                        </div>
+                      </div>
+                    </div>
+                    <form role="form" name="vm.form.gainForm" class="form-horizontal" ng-submit="vm.save(vm.form.gainForm.$valid)" novalidate>
+                      <fieldset>
+                        <div class="row">
+                          <div class="col-lg-12 col-mds-12 col-sm-12">
+                            <div class="sample">
+                              <h2>Contenu HTML</h2>
+                              <textarea froala ng-model="vm.gain.gainContent"></textarea>
+                              <h4>Aperçu:</h4>
+                              <div froala-view="vm.gain.gainContent"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                              <button type="submit" ng-show="vm.gain._id" ng-click="vm.remove()" class="m-t-xl m-r-sm btn btn-danger btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-trash"></i>Supprimer</button>
+                              <button type="submit" class="m-t-xl m-r-sm btn btn-primary btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-floppy-o"></i>{{vm.gain._id ? 'Enregistrer' : 'Ajouter'}}</button>
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </form>
+                  </div>
+                </uib-tab>
+                <uib-tab heading="Segment">
+                  <div class="panel-body">
+                    <form role="form" name="vm.form.gainForm" class="form-horizontal" ng-submit="vm.save(vm.form.gainForm.$valid)" novalidate>
+                      <fieldset>
+                        <div class="row">
+                          <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2">
+                            <div class="row" ng-show="vm.hasSignal">
+                              <div class="col-lg-12">
+                                <div class="form-group gain-form-r" show-errors>
+                                  <label class="control-label" for="gainSignal">Signal</label>
+                                  <select style="width:100%" class="js-example-responsive" ui-select2 ng-model="vm.gain.gainSignal._id" id="gainSignal" name="gainSignal">
+                                    <optgroup label="Sélectionner un signal">
+                                      <option ng-repeat="gainSignal in vm.gainSignals" ng-if="vm.authentication.user._id === gainSignal.user._id" value="{{gainSignal._id}}">{{ gainSignal.signalCode | uppercase }}</option>
+                                    </optgroup>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-lg-12">
+                                <div class="form-group gain-form-r" show-errors>
+                                  <label class="control-label" for="frequence">Fréquence</label>
+                                  <input name="frequence" type="number" min="0" max="1000" ng-model="vm.gain.gainFq" id="frequence" class="form-control" placeholder="Fréquence">
+                                  <h6><em>Valeur de 0 à 1000</em></h6>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-lg-12">
+                                <div class="form-group gain-form-r" show-errors>
+                                  <label class="control-label" for="quota">Quota</label>
+                                  <input name="quota" type="number" min="-1" ng-model="vm.gain.gainQuota" id="quota" class="form-control" placeholder="Quota">
+                                  <h6><em>Vide pour infini</em></h6>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row" ng-if="!vm.hasSignal">
+                              <div class="col-lg-12">
+                                <div class="row m-t-xl">
+                                  <a data-ui-sref="signals.create" class="text-muted add-zone"><i class="fa fa-plus-circle glyphicon"></i> Ajouter un signal</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12 col-lg-12">
+                            <div class="form-group">
+                              <button type="submit" ng-show="vm.gain._id" ng-click="vm.remove()" class="m-t-xl m-r-sm btn btn-danger btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-trash"></i>Supprimer</button>
+                              <button type="submit" class="m-t-xl m-r-sm btn btn-primary btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-floppy-o"></i>{{vm.gain._id ? 'Enregistrer' : 'Ajouter'}}</button>
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </form>
+                  </div>
+                </uib-tab>
+                <uib-tab heading="Planification">
+                  <div class="panel-body">
+                    <form role="form" name="vm.form.gainForm" class="form-horizontal gain-form" ng-submit="vm.save(vm.form.gainForm.$valid)" novalidate>
+                      <fieldset>
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                          <div class="row">
+                            <uib-accordion class="panel-group">
+                              <uib-accordion-group is-open="true">
+                                <uib-accordion-heading>
+                                  <h5 class="panel-title">
+                                    Validité du gain
+                                  </h5>
+                                </uib-accordion-heading>
+                                <div class="col-lg-6 col-md-6">
+                                  <div class="form-group gain-form-l gain-form-r">
+                                    <label class="control-label reg-label" for="gainStartDate">Du</label>
+                                    <p>
+                                      {{ vm.gain.gainStartDate }}
+                                    </p>
+                                    <div class="input-group">
+                                      <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="fa fa-calendar-plus-o"></i></button>
+                                      </span>
+                                      <input type="text" class="form-control" datepicker-options="inlineOptions" show-button-bar ="false" uib-datepicker-popup="dd/MM/yyyy" ng-model="vm.gain.gainStartDate" is-open="popup1.opened" ng-required="true" close-text="Close" ng-click="open1()"/>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                  <div class="form-group gain-form-l gain-form-r">
+                                    <label class="control-label reg-label" for="gainEndDate">Au</label>
+                                    <div class="input-group">
+                                      <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open2()"><i class="fa fa-calendar-plus-o"></i></button>
+                                      </span>
+                                      <input type="text" class="form-control" datepicker-options="inlineOptions" show-button-bar ="false" uib-datepicker-popup="dd/MM/yyyy" ng-model="vm.gain.gainEndDate" is-open="popup2.opened" ng-required="true" close-text="Close" ng-click="open2()"/>
+                                    </div>
+                                  </div>
+                                </div>
+                              </uib-accordion-group>
+                              <uib-accordion-group is-open="false">
+                                <uib-accordion-heading>
+                                  <h5 class="panel-title">
+                                    Affichage du contenu
+                                  </h5>
+                                </uib-accordion-heading>
+                                <div class="row">
+                                  <div class="col-lg-12 col-md-12">
+                                    <div>
+                                      <label class="reg-label">
+                                        <input icheck type="checkbox" ng-model="vm.gain.gainDefaultContent"> Afficher ce contenu si aucun autre contenu n'est disponible lors de la détection d'un signal
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-lg-12 col-md-12">
+                                    <div>
+                                      <label class="reg-label">
+                                        <input icheck type="checkbox" ng-model="vm.gain.gainUCheckinDisplay"> Ne pas faire apparaitre ce contenu dans UCHECK.IN (hors application UCHECK.IN).
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </uib-accordion-group>
+                              <uib-accordion-group is-open="false">
+                                <uib-accordion-heading>
+                                  <h5 class="panel-title">
+                                    Gestion des affichages
+                                  </h5>
+                                </uib-accordion-heading>
+                                <div class="row">
+                                  <div class="col-lg-12">
+                                    <div class="form-group gain-form-r gain-form-l" show-errors>
+                                      <label class="control-label" for="gainMaxDisplay">Nombre maximal d'affichages</label>
+                                      <input name="gainMaxDisplay" type="number" min="-1" ng-model="vm.gain.gainMaxDisplay" id="gainMaxDisplay" class="form-control">
+                                      <h6>Si le signal est détecté plusieurs fois, le gain ne sera pas affiché plus de X fois au total. -1 signifie affichage illimité.</h6>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-lg-12">
+                                    <div class="form-group gain-form-r gain-form-l" show-errors>
+                                      <label class="control-label" for="gainDisplayDelay">Délai entre 2 affichages</label>
+                                      <input name="gainDisplayDelay" type="number" min="0" ng-model="vm.gain.gainDisplayDelay" id="gainDisplayDelay" class="form-control">
+                                      <h6>Si le signal est détecté plusieurs fois, le gain ne sera pas affiché avant que X minutes ne soient écoulées depuis le dernier affichage. -1 signifie aucun délai entre deux affichages.</h6>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-lg-12">
+                                    <div class="form-group gain-form-r gain-form-l" show-errors>
+                                      <label class="control-label" for="gainPriority">Priorité du gain</label>
+                                      <input name="gainPriority" type="number" min="0" ng-model="vm.gain.gainPriority" id="gainPriority" class="form-control">
+                                      <h6>Les gains seront classés par numéro d'ordre croissant (par ex., 10 sera avant 20 ou 40).</h6>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-lg-12">
+                                    <div class="form-group gain-form-r gain-form-l" show-errors>
+                                      <label class="control-label" for="gainDistinctDisplayDelay">Délai d'affichage entre deux messages</label>
+                                      <input name="gainDistinctDisplayDelay" type="number" min="-1" ng-model="vm.gain.gainDistinctDisplayDelay" id="gainDistinctDisplayDelay" class="form-control">
+                                      <h6>Ce gain ne s'affichera que X minutes après l'affichage du contenu précédent. -1 signifie aucun délai.</h6>
+                                    </div>
+                                  </div>
+                                </div>
+                              </uib-accordion-group>
+                            </uib-accordion>
+                            <div class="form-group">
+                              <button type="submit" ng-show="vm.gain._id" ng-click="vm.remove()" class="m-t-xl m-r-sm btn btn-danger btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-trash"></i>Supprimer</button>
+                              <button type="submit" class="m-t-xl m-r-sm btn btn-primary btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-floppy-o"></i>{{vm.gain._id ? 'Enregistrer' : 'Ajouter'}}</button>
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </form>
+                  </div>
+                </uib-tab>
+              </uib-tabset>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

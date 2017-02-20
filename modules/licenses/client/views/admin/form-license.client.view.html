@@ -1,0 +1,100 @@
+<section>
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+      <h2>Licences</h2>
+      <ol class="breadcrumb">
+        <li class="active">
+          <a data-ui-sref="home">Accueil</a>
+        </li>
+        <li class="active">
+          Admin
+        </li>
+        <li class="active">
+          <a data-ui-sref="admin.licenses.list">Licences</a>
+        </li>
+        <li class="active">
+          <strong>{{vm.license._id ? 'Modifier la licence' : 'Ajouter une licence'}}</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-6 col-lg-offset-3 admin-lic-form-box">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title li-license-form">
+            <h5>{{vm.license._id ? 'Modifier la licence' : 'Ajouter une licence'}}
+            </h5>
+          </div>
+          <div class="ibox-content">
+            <form role="form" name="vm.form.licenseForm" class="form-horizontal" ng-submit="vm.save(vm.form.licenseForm.$valid)" novalidate>
+              <fieldset>
+                <div class="col-sm-12">
+                  <div ng-if ="vm.license._id" class="row">
+                    <div class="col-lg-12">
+                      <div class="form-group p-w-sm" show-errors>
+                        <label class="control-label" for="licenseName">ID</label>
+                        <input name="licenseName" type="text" ng-model="vm.license.licenseName" id="licenseName" class="form-control" placeholder="ID">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <div class="form-group p-w-sm">
+                        <label class="control-label" for="status">Statut</label><br>
+                        <input name="licenseStatus" type="checkbox" class="js-switch" id="licenseStatus" ui-switch="{color:'#1AB394', secondaryColor: '#ED5565'}" data-ng-model="vm.license.licenseStatus"/>
+                        <!--<input value="licenseStatus" name="licenseStatus" type="text" class="js-switch" id="licenseStatus" ui-switch="{color:'#1AB394', secondaryColor: '#ED5565'}" data-ng-model="vm.license.licenseStatus"/>-->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group p-w-lg" show-errors>
+                      <label class="control-label" for="beaconType">Client</label>
+                      <select style="width:100%" class="js-example-responsive" ui-select2 ng-model="vm.license.user" id="beaconType" name="user" >
+                        <optgroup label="Sélectionner un client">
+
+                        </optgroup>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group p-w-lg" show-errors>
+                      <label class="control-label" for="beaconType">Type</label>
+                      <select style="width:100%" class="js-example-responsive" ui-select2 ng-model="vm.license.licenseType" id="beaconType" name="beaconType" required>
+                        <optgroup label="Sélectionner un type de licence">
+                          <option value="Free">Free</option>
+                          <option value="Stimshop">Stimshop</option>
+                          <option value="Third Party">Third Party</option>
+                        </optgroup>
+                      </select>
+                    </div>
+                  </div>
+                  <!--<div class="form-group p-w-sm">
+                  <label class="control-label" for="content">Type</label>
+                  <textarea name="content" data-ng-model="vm.license.licenseType" id="content" class="form-control" cols="30" rows="10" placeholder="Type"></textarea>
+                </div>-->
+                <div ng-show="vm.error" class="text-danger">
+                  <strong ng-bind="vm.error"></strong>
+                </div>
+              </div>
+              <!--<div class="form-group p-w-sm">
+              <label class="control-label" for="content">Lieu</label>
+              <textarea name="place" data-ng-model="vm.license.place" id="place" class="form-control" cols="30" rows="10" placeholder="Lieu"></textarea>
+            </div>
+            <div class="form-group p-w-sm">
+            <label class="control-label" for="content">Zone</label>
+            <textarea name="zone" data-ng-model="vm.license.zone" id="zone" class="form-control" cols="30" rows="10" placeholder="Zone"></textarea>
+          </div>-->
+          <div class="form-group p-w-sm">
+            <button type="submit" ng-show="vm.license._id" ng-click="vm.remove()" class="m-t-md m-r-sm btn btn-danger btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-trash"></i>Supprimer</button>
+            <button type="submit" class="m-t-md m-r-sm btn btn-primary btn-rounded btn-outline btn-md pull-right"><i class="glyphicon fa fa-floppy-o"></i>{{vm.license._id ? 'Enregistrer' : 'Créer'}}</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+</section>
