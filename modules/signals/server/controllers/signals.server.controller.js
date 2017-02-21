@@ -26,7 +26,7 @@ exports.create = function (req, res) {
   var rack = hat.rack();
   signal.signalCode = rack().substr(0,5).toUpperCase();
 
-  exec('modules/signals/producer -v '+ signal.signalCode + ' -l 17000 -m 18000 -f modules/signals/client/sounds/C1-' + signal.signalCode + '.wav', function(error, stdout, stderr) {
+  /*exec('modules/signals/producer -v '+ signal.signalCode + ' -l 17000 -m 18000 -f modules/signals/client/sounds/C1-' + signal.signalCode + '.wav', function(error, stdout, stderr) {
     console.log('stdout: ' + stdout);
     console.log('stderr: ' + stderr);
     if (error !== null) {
@@ -88,7 +88,7 @@ exports.create = function (req, res) {
     if (error !== null) {
       console.log('exec error: ' + error);
     }
-  });
+  });*/
 
   signal.save(function (err) {
 
