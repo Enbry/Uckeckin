@@ -17,8 +17,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "grunt test",
-    "postinstall": "bower install --config.interactive=false",
-    "shrinkwrap": "npm-shrinkwrap"
+    "postinstall": "bower install --config.interactive=false"
   },
   "dependencies": {
     "acl": "~0.4.4",
@@ -44,9 +43,7 @@
     "electron": "^1.4.15",
     "express": "^4.13.1",
     "express-session": "^1.11.3",
-    "ffmpeg": "0.0.4",
     "file-stream-rotator": "~0.0.6",
-    "fluent-ffmpeg": "^2.1.0",
     "forever": "~0.14.2",
     "generate-password": "^1.1.1",
     "glob": "^5.0.13",
@@ -65,12 +62,13 @@
     "mongoose-minute": "^1.0.0",
     "morgan": "^1.6.1",
     "multer": "~1.0.5",
+    "ng-audio": "0.0.2",
+    "ng-file-upload": "^12.2.13",
     "ng-tags-input": "^3.1.1",
     "ngmap": "https://registry.npmjs.org/ngmap/-/ngmap-1.17.8.tgz",
     "node-ffprobe": "^1.2.2",
     "node-time": "^0.1.0",
     "nodemailer": "^1.4.0",
-    "npm-shrinkwrap": "^6.0.2",
     "oclazyload": "^1.0.9",
     "owasp-password-strength-test": "^1.3.0",
     "passport": "~0.2.2",
@@ -83,7 +81,6 @@
     "passport-paypal-openidconnect": "^0.1.1",
     "passport-twitter": "^1.0.2",
     "phantomjs": ">=1.9.0",
-    "random-signal": "0.0.2",
     "run-auto": "^2.0.0",
     "serve-favicon": "https://registry.npmjs.org/serve-favicon/-/serve-favicon-2.3.0.tgz",
     "socket.io": "^1.3.7",
